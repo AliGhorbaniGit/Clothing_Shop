@@ -1,3 +1,15 @@
-from django.shortcuts import render
+from django.views import generic
 
-# Create your views here.
+from .models import CustomUser
+from .forms import CustomUserChangeForm, CustomUserCreationFrom
+
+
+class Login(generic.CreateView):
+    form_class = CustomUserCreationFrom
+    template_name = 'accounts/login.html'
+    context_object_name = 'form'
+
+
+
+
+

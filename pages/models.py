@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth import get_user_model
+from django.urls import reverse
 
 from accounts.models import CustomUser
 
@@ -14,13 +14,19 @@ class Package(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('package_detail_view', args=[self.id])
+
 
 class Comment(models.Model):
-    author = models.ForeignKey(CustomUser, related_name='author',on_delete=models.CASCADE,verbose_name=_("author") )
+    author = models.ForeignKey(CustomUser, related_name='author',on_delete=models.CASCADE,verbose_name=_("author"))
+    package_name = models.ForeignKey(Package, related_name='package', on_delete=models.CASCADE, verbose_name=_('package_name'))
     text = models.TextField(verbose_name=_("text"))
     data_created = models.DateTimeField(auto_now_add=True,verbose_name=_("data_created"))
     data_modified = models.DateTimeField(auto_now=True,verbose_name=_("data_modified"))
 
+    def __str__(self):
+        return self.text
 
 
 

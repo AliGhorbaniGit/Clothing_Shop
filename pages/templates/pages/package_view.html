@@ -1,0 +1,16 @@
+{% extends '_base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block content %}
+
+    {{ package.title }}
+    {% for com in comment  %}
+        {{ com.text }}
+    {% endfor %}
+
+
+
+
+{% endblock %}

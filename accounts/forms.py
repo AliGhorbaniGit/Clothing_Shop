@@ -6,8 +6,8 @@ from django.contrib.auth import get_user_model
 class CustomUserCreationFrom(UserCreationForm):
     class Meta:
         model = get_user_model()
-        fields = ('username', 'email', 'password',)
-        widgets = {'password': forms.PasswordInput(), }
+        fields = ('username', 'email')
+        widgets = {'password': forms.PasswordInput()}
 
 
 class CustomUserChangeForm(UserChangeForm):
