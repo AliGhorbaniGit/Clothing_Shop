@@ -1,3 +1,17 @@
 {% extends '_base.html' %}
 {% load i18n %}
 {% load static %}
+
+
+{% block content %}
+
+    {% for pack in package %}
+        {{ pack.title }}
+    {% endfor %}
+
+
+    {% for pack in pages_comment %}
+        <a href="">{{ pack.title }}</a>
+    {% endfor %}
+
+{% endblock %}
