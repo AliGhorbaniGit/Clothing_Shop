@@ -13,5 +13,5 @@ class CustomUserCreationFrom(UserCreationForm):
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = get_user_model()
-        fields = ('username', 'email', 'password',)
+        fields = ('email', 'password',)
         widgets = {'password': forms.PasswordInput(), }

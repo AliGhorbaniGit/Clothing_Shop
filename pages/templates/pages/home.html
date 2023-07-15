@@ -3,9 +3,27 @@
 {% load static %}
 
 
+{% if massages %}
+    {% for massage in massages %}
+        <P> {{ massage }} </p>
+    {% endfor %}
+{% endif %}
+
+
 {% block content %}
     <br>
-    <a href="{% url 'login_view' %}"> login </a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">{{ user.username }} log out </a>
+        <a href="{% url 'password_reset' %}">pass reset </a>
+
+    {% else %}
+        <a href="{% url 'login' %}"> login </a>
+        <br>
+        <a href="{% url 'sign_in' %}"> sign in </a>
+
+    {% endif %}
+
+
     <br>
     {% for pack in package %}
         <a href="{{ pack.get_absolute_url }}">{{ pack.title }}</a>
