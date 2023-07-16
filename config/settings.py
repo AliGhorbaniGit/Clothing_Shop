@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+from django.urls import reverse
 from environs import Env
 
 env = Env()
@@ -26,13 +27,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("django_secret_key")
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
 # Application definition
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -41,9 +49,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
+    # third party apps :
+    'phonenumber_field',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    # my apps :
     'accounts',
     'pages',
-    'phonenumber_field',
+
 ]
 
 MIDDLEWARE = [
@@ -132,5 +149,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # CUSTOM USER :
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
-#authentication
-LOGIN_REDIRECT_URL = 'home'
+# all-auth settings :
+SITE_ID = 1
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+LOGIN_REDIRECT_URL = 'ShowPackages'
+LOGOUT_REDIRECT_URL = 'ShowPackages'
+ACCOUNT_SECTION_REMEMBER = True
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_authentication_METHOD = 'email'
+ACCOUNTS_EMAIL_REQUIRED = True
+ACCOUNTS_UNIQUE_EMAIL = True
+
+
