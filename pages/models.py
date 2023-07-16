@@ -19,7 +19,7 @@ class Package(models.Model):
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(CustomUser, related_name='author',on_delete=models.CASCADE,verbose_name=_("author"))
+    author = models.ForeignKey(CustomUser, related_name='author', on_delete=models.CASCADE,verbose_name=_("author"))
     package_name = models.ForeignKey(Package, related_name='package', on_delete=models.CASCADE, verbose_name=_('package_name'))
     text = models.TextField(verbose_name=_("text"))
     data_created = models.DateTimeField(auto_now_add=True,verbose_name=_("data_created"))

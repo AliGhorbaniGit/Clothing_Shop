@@ -8,7 +8,16 @@
     {{ package.title }}
     {% for com in comment  %}
         {{ com.text }}
+        {{ com.author }}
+        <br>
     {% endfor %}
+{% if user.is_authenticated %}
+    <form action="" method="POST">
+    {% csrf_token %}
+       {{ comment_form }}
+    <button type="submit"> sub </button>
+    </form>
+{% endif %}
 
 
 
