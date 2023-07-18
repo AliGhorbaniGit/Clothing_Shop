@@ -13,7 +13,8 @@
 {% block content %}
     <br>
     {% if user.is_authenticated %}
-        <a href="{% url 'account_logout' %}">{{ user.username }} log out </a>
+        <a href="{% url 'account_logout' %}">{{ user.username }} <br> log out </a>
+        <br>
         <a href="{% url 'account_change_password' %}">pass reset </a>
 
     {% else %}
