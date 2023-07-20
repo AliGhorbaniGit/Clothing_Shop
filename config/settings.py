@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     # my apps :
     'accounts',
     'pages',
-    'cart.app.CartConfig',
+    'cart.apps.CartConfig',
 
 ]
 

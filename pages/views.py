@@ -1,9 +1,12 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
+from django.utils.translation import gettext as _
 
 from .models import Package, Comment
 from .forms import CommentForm
+from cart.forms import AddToCartForm
 
 
 class ShowPackages(generic.ListView):
@@ -12,17 +15,13 @@ class ShowPackages(generic.ListView):
     context_object_name = 'package'
 
 
-def package_detail_view(request, pk, **kwargs ):
+def package_detail_view(request, pk):
     package = get_object_or_404(Package, pk=pk)
     comment = package.package.all()
     comment_form = CommentForm
+    cart_form = AddToCartForm
 
-    if request.method == 'GET':
-        return render(request, 'pages/package_view.html', {"package": package,
-                                                           "comment": comment,
-                                                           "comment_form": comment_form})
-
-    else:
+    if request.method == 'POST':
         if request.user.is_authenticated:
             form = CommentForm(request.POST)
             if form.is_valid():
@@ -30,9 +29,12 @@ def package_detail_view(request, pk, **kwargs ):
                 new_form.author = request.user
                 new_form.package_name = package
                 new_form.save()
-                return render(request, 'pages/package_view.html', {"package": package, "comment": comment, "comment_form": comment_form})
-
+                messages.success(request, _('comment send successfully'))
         else:
             return redirect('account_login')
+
+    return render(request, 'pages/package_view.html', {"package": package,
+                                                       "comment": comment,
+                                                       "comment_form": comment_form, "cart_form": cart_form})
 
 

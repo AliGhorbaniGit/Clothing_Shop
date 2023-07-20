@@ -7,15 +7,16 @@ from accounts.models import CustomUser
 
 class Package(models.Model):
     title = models.CharField(max_length=300, verbose_name=_('title'))
-    data_created = models.DateTimeField(auto_now_add=True, verbose_name=_('data created'))
+    price = models.PositiveIntegerField(blank=True, verbose_name=_('price'))
     image = models.ImageField(blank=True, upload_to='media/image', verbose_name=_('image'))
     description = models.TextField(blank=True, verbose_name=_('description'))
+    data_created = models.DateTimeField(auto_now_add=True, verbose_name=_('data created'))
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('package_detail_view', args=[self.id])
+        return reverse('package_detail_view', args=[self.pk])
 
 
 class Comment(models.Model):
