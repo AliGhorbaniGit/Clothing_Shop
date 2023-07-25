@@ -17,8 +17,17 @@
     {% endfor %}
 
 {% endif %}
+how many in cart : {{ cart|length }}
+
 
 {% block content %}
+
+    how many in cart : {{ cart|length }}
+
+    sabad kharid :{% for cart in cart %}
+                      {{ cart.product_obj.title }}
+                   {% endfor %}
+
 
 
 {% endblock %}

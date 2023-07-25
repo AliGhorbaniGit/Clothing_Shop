@@ -31,7 +31,7 @@ class Cart:
         else:
             self.cart[product_id]['quantity'] += quantity
 
-        messages.success(self.request,_("a product added to cart"))
+        messages.success(self.request, _("a product added to cart"))
 
         self.save()
 
@@ -53,30 +53,40 @@ class Cart:
             self.save()
 
     def __iter__(self):
-        product_ids = self.cart.keys()
+        if self.cart:
+            product_ids = self.cart.keys()
+           # cart = self.cart.copy()  # I don't want to change the cart, so I copy it because when I copy
+                    # a things, the main don't change, here self.cart will never change, and cart will change
 
-        products = Package.objects.filter(id__in=product_ids)
+            for id in product_ids:
+                product = Package.objects.filter(id=id)
+                if product is True:
+                    product_id = str(product.id)
+                    self.cart[product_id]['product_obj'] += product
+                    self.cart[product_id] = {'quantity': self.cart.product_id.quantity}
 
-        cart = self.cart.copy()  # I don't want to change the cart, so I copy it because when I copy
-        # a things, the main don't change, here self.cart will never change, and cart will change
-
-        for product in products:
-            cart[str(product.id)]['product_obj'] = product
-
-        for item in cart.values():
-            item['total_price'] = item['product_obj'].price * item['quantity']
-            yield item
+                    if self.cart.values().__len__() > 0:
+                        for item in self.cart.values():
+                                item['total_price'] = item['product_obj'].price * item['quantity']
+                                yield item
+                else:
+                    self.clear()
 
     def __len__(self):
-        return len(self.cart.keys())
+        # return len(self.cart.keys()) its show only product length without quantity
+        return sum(item['quantity'] for item in self.cart.values())
 
     def clear(self):
         del self.session['cart']
-        messages.success(self.request,_("cart get empty"))
+        messages.success(self.request, _("cart get empty"))
         self.save()
 
     def total_price(self):
         product_ids = self.cart.keys()
 
-        return sum(item['quantity'] * item['product_obj'].price for item in self.cart.values())
-
+        for item in self.cart.values():
+            if item and self.cart.values().__len__() > 1 :
+                total = sum(item['quantity'] * item['product_obj'].price)
+            else:total=''
+            return total
+        # return sum(item['quantity'] * item['product_obj'].price for item in self.cart.values())

@@ -3,9 +3,13 @@ from django.contrib import admin
 from .models import Package, Comment
 
 
-class AddPackageToAdmin(admin.ModelAdmin):
-    pass
+class PackageAdmin(admin.ModelAdmin):
+    list_display = ['title', 'price']
 
 
-admin.site.register(Package, AddPackageToAdmin)
-admin.site.register(Comment, AddPackageToAdmin)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['author', 'text']
+
+
+admin.site.register(Package, PackageAdmin)
+admin.site.register(Comment, CommentAdmin)

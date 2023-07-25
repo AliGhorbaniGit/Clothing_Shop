@@ -14,10 +14,10 @@ def cart_detail_view(request):
             'quantity': item['quantity'],
             'inplace': True,
         })
+
     return render(request, 'cart/cart_detail.html', {'cart': cart})
 
 
-@require_POST
 def add_to_cart_view(request, product_id):
     cart = Cart(request)
 
