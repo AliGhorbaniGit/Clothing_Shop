@@ -1,52 +1,57 @@
-{#{% extends '_base.html' %}#}
-{##}
-{#{% block content %}#}
-{#{% for foo in cart %}#}
-{#    {% if foo %}#}
-{#       {{ foo.product_obj.title }}<br>#}
-{#       ff {{ foo.total_price }}<br>#}
-{#    {{ foo.quantity }}<br>#}
-{##}
-{#    <form action="{% url 'add_to_cart' foo.product_obj.id %}" method="POST">#}
-{#        {% csrf_token %}#}
-{#        {{ foo.product_update_quantity_form.inplace }}#}
-{#        <p onclick="add(m={{ foo.product_obj.id }})"> add</p>#}
-{#        <input name="quantity" id="{{ foo.product_obj.id }}" value="1" min="1" max="30">#}
-{#        <p onclick="kam(m={{ foo.product_obj.id }})"> kam</p>#}
-{#        <button type="submit"> sub</button>#}
-{##}
-{#    </form>#}
-{##}
-{##}
-{##}
-{#    <a href="{% url 'remove_from_cart' foo.product_obj.id %}">remove</a>#}
-{#    <br>#}
-{#    <br>#}
-{#    {% endif %}#}
-{##}
-{#{% endfor %}#}
-{##}
-{#total : {{ cart.total_price }}#}
-{##}
-{##}
-{#<script>#}
-{##}
-{#       i = 1;#}
-{#    function add(m) {#}
-{#           i += 1;#}
-{##}
-{##}
-{#        document.getElementById(m).value = i;#}
-{##}
-{#    }#}
-{##}
-{#    function kam(m) {#}
-{#        i -= 1;#}
-{#        document.getElementById(m).value = i;#}
-{#    }#}
-{##}
-{##}
-{#</script>#}
-{##}
-{#{% endblock content %}#}
-{##}
+{% extends '_base.html' %}
+
+{% block content %}
+{% for foo in cart %}
+    {% if foo %}
+       {{ foo.product_obj.title }}<br>
+       ff {{ foo.total_price }}<br>
+    {{ foo.quantity }}<br>
+
+    <form action="{% url 'add_to_cart' foo.product_obj.id %}" method="POST">
+        {% csrf_token %}
+        {{ foo.product_update_quantity_form.inplace }}
+        <p onclick="add(m={{ foo.product_obj.id }})"> add</p>
+        <input name="quantity" id="{{ foo.product_obj.id }}" value="1" min="1" max="30">
+        <p onclick="kam(m={{ foo.product_obj.id }})"> kam</p>
+        <button type="submit"> sub</button>
+
+    </form>
+
+
+
+    <a href="{% url 'remove_from_cart' foo.product_obj.id %}">remove</a>
+    <br>
+    <br>
+    {% endif %}
+
+{% endfor %}
+
+total : {{ cart.total_price }}
+{% if cart|length %}
+      <a href="{% url 'order_create' %}"> pay </a>
+    <br>
+    <a href="{% url 'clear_cart' %}"> clear</a>
+
+{% endif %}
+
+<script>
+
+       i = 1;
+    function add(m) {
+           i += 1;
+
+
+        document.getElementById(m).value = i;
+
+    }
+
+    function kam(m) {
+        i -= 1;
+        document.getElementById(m).value = i;
+    }
+
+
+</script>
+
+{% endblock content %}
+

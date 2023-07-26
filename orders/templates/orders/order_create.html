@@ -1,0 +1,15 @@
+{% extends '_base.html' %}
+{% block content %}
+    {% if order_from.errors %}
+        {% for err in errors %}
+                <p>err</p>
+        {% endfor %}
+    {% endif %} 
+your order :
+    <form action="" method="POST">
+    {% csrf_token %}
+    {{ order_form.as_p }}
+    <button type="submit"> sub</button>
+    </form>
+
+{% endblock %}

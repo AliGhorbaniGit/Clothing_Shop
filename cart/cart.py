@@ -69,8 +69,8 @@ class Cart:
                         for item in self.cart.values():
                                 item['total_price'] = item['product_obj'].price * item['quantity']
                                 yield item
-                else:
-                    self.clear()
+                # else:
+                #     self.clear()
 
     def __len__(self):
         # return len(self.cart.keys()) its show only product length without quantity

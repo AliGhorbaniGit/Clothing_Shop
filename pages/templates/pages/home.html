@@ -24,7 +24,7 @@
 
     {% endif %}
 
-
+<a href="{% url 'cart_detail' %}">cart</a>
     <br>
     {% for pack in package %}
         <a href="{{ pack.get_absolute_url }}">{{ pack.title }}</a>
