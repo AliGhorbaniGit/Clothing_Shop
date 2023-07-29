@@ -17,11 +17,21 @@ class Order(models.Model):
 
     order_notes = models.CharField(max_length=700, blank=True)
 
+    zarinpai_authority = models.CharField(max_length=255, blank=True)
+
     data_created = models.DateTimeField(auto_now_add=True, verbose_name=_("data_created"))
     data_modified = models.DateTimeField(auto_now=True, verbose_name=_("data_modified"))
 
     def __str__(self):
         return f'Order {self.id}'
+
+    def get_total_price(self):
+        result = 0
+        for item in self.items.all():  # here self is this order its equal to write order.items, its a query
+            result += item.price * item.quantity
+            return result
+        # I can write that code in one line:
+        # return sum(item.price * item.quantity for item in self.items.all())
 
 
 class OrderItem(models.Model):

@@ -12,6 +12,7 @@ services:
       - db
     environment:
       - "django_secret_key=docker_compose_django_secret_key"
+      - "DJANGO_ZARINPAL_MERCHANT_ID=${DOCKER_COMPOSE_DJANGO_ZARINPAL_MERCHANT_ID}"
   db:
     image: postgres:14
     environment:
