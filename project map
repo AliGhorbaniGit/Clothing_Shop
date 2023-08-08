@@ -1,0 +1,14 @@
+i18n and two language : in all file
+security
+create a base repository
+test
+create custom panel admin
+clear code : and provide its book to read
+use comment for code
+add to git repository
+MESSAGES IN EVERY ACTION
+REFORM CART FUNCTION AND CART.VIEWS
+LIMITATION BY login_required OR @POST_REQUIRE
+'callback_url': 'http://127.0.0.1:8000' + reverse('payment_callback') :
+I should change it in payment/views, when i not in develop mod and deploy site happened
+

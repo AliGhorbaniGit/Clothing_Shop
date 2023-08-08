@@ -8,16 +8,35 @@ from .forms import AddToCartForm
 from pages.models import Package
 
 
+# def cart_detail_view(request):
+#     cart = Cart(request)
+#     fresh_cart = cart.__iter__()
+#     if fresh_cart :
+#         for item in fresh_cart:
+#             item['product_update_quantity_form'] = AddToCartForm(initial={
+#                 'quantity': item['quantity'],
+#                 'inplace': True,
+#             })
+#         return render(request, 'cart/cart_detail.html', {'cart': fresh_cart})
+#     else:
+#         messages.warning(request, 'the products that you added , now deleted ')
+#         return render(request, 'cart/cart_detail.html')
+
 def cart_detail_view(request):
     cart = Cart(request)
-
-    for item in cart:
-        item['product_update_quantity_form'] = AddToCartForm(initial={
-            'quantity': item['quantity'],
-            'inplace': True,
-        })
-
-    return render(request, 'cart/cart_detail.html', {'cart': cart})
+    # cart.update()
+    print('**********im in after')
+    if cart:
+        for item in cart:
+            item['product_update_quantity_form'] = AddToCartForm(initial={
+                'quantity': item['quantity'],
+                'inplace': True,
+            })
+            print('******* im here in cart_detail_view(request):')
+            return render(request, 'cart/cart_detail.html', {'cart': cart, })
+    else:
+        print('******* not cart, im here in cart_detail_view(request):')
+        return render(request, 'cart/cart_detail.html', )
 
 
 def add_to_cart_view(request, product_id):
@@ -49,7 +68,7 @@ def clear_cart(request):
 
     if len(cart):
         cart.clear()
-        messages.success(request,_('your cart get empy'))
+        messages.success(request, _('your cart get empy'))
     else:
-        messages.warning(request,_('you have nothing in cart'))
+        messages.warning(request, _('you have nothing in cart'))
     return redirect('cart_detail')
