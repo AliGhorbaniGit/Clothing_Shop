@@ -7,6 +7,11 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class Order(models.Model):
     """ CREATE A MODEL TO SAVE ORDER"""
+
+    class Meta:
+        verbose_name = _("Order")
+        verbose_name_plural = _("Orders")
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_('user'))
     # when I have this in setting, so I can use this variable here
     is_paid = models.BooleanField(default=False, verbose_name=_('is paid'))
@@ -40,6 +45,11 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     """ CREATE A MODEL TO SAVE ITEMS OF ORDER """
+
+    class Meta:
+        verbose_name = _("OrderItem")
+        verbose_name_plural = _("OrderItems")
+
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items', verbose_name=_('which order'))
     product = models.ForeignKey('pages.package', on_delete=models.CASCADE, related_name='order_items',
                                 verbose_name=_('which product'))

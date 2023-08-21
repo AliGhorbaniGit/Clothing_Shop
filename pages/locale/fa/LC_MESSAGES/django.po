@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-08 10:55+0330\n"
-"PO-Revision-Date: 2023-08-08 16:01+0000\n"
+"PO-Revision-Date: 2023-08-21 19:36+0000\n"
 "Last-Translator: Ali Ghorbani <aghorbani778@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,6 +18,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: .\models.py
+msgid "Packages"
+msgstr " محصولات"
+
+#: .\models.py
+msgid "Package"
+msgstr " محصول"
+
+#: .\models.py
+msgid "Comments"
+msgstr "نظرات"
+
+#: .\models.py
+msgid "Comment"
+msgstr "نظر"
 
 #: .\models.py:10
 msgid "title"

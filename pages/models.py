@@ -1,12 +1,16 @@
 from django.db import models
-from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 
+from django.utils.translation import gettext_lazy as _
 from accounts.models import CustomUser
 
 
 class Package(models.Model):
     """ PRODUCT MODEL """
+    class Meta:
+        verbose_name = _("Package")
+        verbose_name_plural = _("Packages")
+
     title = models.CharField(max_length=300, verbose_name=_('title'))
     price = models.PositiveIntegerField(blank=True, verbose_name=_('price'))
     image = models.ImageField(blank=True, upload_to='media/image', verbose_name=_('image'))
@@ -21,6 +25,10 @@ class Package(models.Model):
 
 
 class Comment(models.Model):
+    class Meta:
+        verbose_name = _("Comment")
+        verbose_name_plural = _("Comments")
+
     author = models.ForeignKey(CustomUser, related_name='author', on_delete=models.CASCADE, verbose_name=_("author"))
     package_name = models.ForeignKey(Package, related_name='package', on_delete=models.CASCADE,
                                      verbose_name=_('package name'))

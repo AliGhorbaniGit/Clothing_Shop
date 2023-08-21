@@ -2,9 +2,9 @@
 
 {% block content %}
     {% if cart %}
-
+    {{ cart|length }}
         {% for foo in cart %}
-            {% if foo %}
+            <div style="border:1px solid red;">
                 <br>
                 {{ foo.product_obj.title }}<br>
                 {{ foo.total_price }}<br>
@@ -25,8 +25,7 @@
                 <a href="{% url 'remove_from_cart' foo.product_obj.id %}">remove</a>
                 <br>
                 <br>
-            {% endif %}
-
+</div>
         {% endfor %}
 
         total : {{ cart.total_price }}

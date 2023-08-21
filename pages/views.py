@@ -24,7 +24,7 @@ def package_detail_view(request, pk):
     comment = package.package.all()
     comment_form = CommentForm
     cart_form = AddToCartForm
-
+    print('4444444444444444444444444')
     if request.method == 'POST':
         if request.user.is_authenticated:
             form = CommentForm(request.POST)
