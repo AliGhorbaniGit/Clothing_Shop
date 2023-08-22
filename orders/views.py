@@ -13,7 +13,6 @@ from cart.cart import Cart
 def order_create_view(request):
     order_form = OrderForm()
     cart = Cart(request)
-    cart = Cart(request)
     print('*********************im in create order')
     if len(cart) == 0:
         print('*****************im in create order and len cart is 0')
@@ -27,6 +26,7 @@ def order_create_view(request):
             order_obj = order_form.save(commit=False)
             order_obj.user = request.user
             order_obj.save()
+            print('*******************in request.method == post and  form is valid')
 
             for item in cart:
                 product = item['product_obj']
