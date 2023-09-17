@@ -1,21 +1,26 @@
+do:
 
-write the option of my site to attract customers as boses
-i must change phon number
-test
-REFORM CART FUNCTION AND CART.VIEWS
-LIMITATION BY login_required OR @POST_REQUIRE
-i18n and two language : in all file : #done
-payment/order_create_view : there is a clear cart , so what i wanna do to this
-test for orders
+    write the option of my site to attract customers as boses
+    i must change phon number ?
+    REFORM and clean cod and provide its book to read
+    test for payment
+    add to git repository
+    MESSAGES IN EVERY ACTION
+    I should change it in payment/views, when i not in develop mod and deploy site happened
+    'callback_url': 'http://127.0.0.1:8000' + reverse('payment_callback') :
+    security
+    create a base repository
+    create custom panel admin
+    secret-key in car_wheels in git
 
-add to git repository
-clear code : and provide its book to read
-MESSAGES IN EVERY ACTION
-I should change it in payment/views, when i not in develop mod and deploy site happened
-'callback_url': 'http://127.0.0.1:8000' + reverse('payment_callback') :
-security
-create a base repository
-create custom panel admin
+    a view for contact us and a number or tel , ..., company address, bisines sentense like zan zendegi azadi
+    code cpacha , repadly questions,
+
+done :
+
+    LIMITATION BY login_required OR @POST_REQUIRE
+    i18n and two language : in all file
+    payment/order_create_view : there is a clear cart , so what i wanna do to this
+    use comment for code
 
 
-use comment for code

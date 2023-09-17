@@ -1,0 +1,49 @@
+.holder {
+    border: 1px solid grey;
+    width: 30%;
+    position: absolute;
+    top: 40%;
+    left: 38%;
+    height: 300px;
+    box-shadow: 1px -3px 10000px 5px #003366;
+    border-radius: 2px 2px 50px 50px;
+    background: indigo;
+}
+
+.info {
+    width: 40%;
+    height: 80px;
+    margin: 40px 0px 20px 26px;
+    display: inline-block;
+    text-align: center;
+    border: 2px solid white;
+    box-shadow: 1px -3px 4px -1px #ddffdd;
+    border-radius: 35px 35px 2px 2px;
+}
+
+.label_remember {
+    margin-left: 150px;
+    text-align: center;
+}
+
+.sub {
+    width: 25%;
+    height: 30px;
+    text-align: center;
+    display: block;
+    margin: 40px auto;
+    border: 2px solid white;
+    box-shadow: 0 -2px 3px 1px #003366;
+    border-radius: 2px 2px 25px 25px;
+}
+
+li {
+    color: #ba2121;
+    box-shadow: 0 -2px 3px 1px #003366;
+    border-radius: 2px 2px 25px 25px;
+    list-style: none;
+    text-align: center;
+    margin-right: 27px;
+    display: block;
+    height: 30px;
+}

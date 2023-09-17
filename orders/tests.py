@@ -13,9 +13,9 @@ from pages.models import Package
 class OrderViewsTest(TestCase):
 
     def setUp(self):
-
+        self.test_user = CustomUser.objects.create(password='1axas5xa', email='aghor@gmail.com')
         login = self.client.get(reverse('account_login'))
-        user = get_user_model().objects.create(username="@raymond.penners")
+        user = get_user_model().objects.create(username="Ali")
         user.set_password("psst")
         user.save()
         EmailAddress.objects.create(
@@ -26,10 +26,9 @@ class OrderViewsTest(TestCase):
         )
         self.resp = self.client.post(
             reverse("account_login"),
-            {"login": "@raymond.penners", "password": "psst"},
+            {"login": "ALi", "password": "psst"},
         )
         # car = CartTest.test_add_to_cart_view_by_url_name
-        self.test_user = CustomUser.objects.create(password='1axas5xa', email='aghor@gmail.com')
         self.test = Package.objects.create(title='test', price=2, image='image/url', description='description', )
         self.test2 = Package.objects.create(title='testt', price=2, image='image/urll', description='ddescription', )
         # add = self.client.get(reverse('add_to_cart', args=[self.test2.id]))

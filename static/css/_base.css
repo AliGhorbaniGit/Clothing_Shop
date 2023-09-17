@@ -1,0 +1,12 @@
+
+/* converting english numbers to persian numbers */
+.ss02 {
+    -moz-font-feature-settings: "ss02";
+    -webkit-font-feature-settings: "ss02";
+    font-feature-settings: "ss02";
+}
+
+body {
+    font-family:"IRANSansX", sans-serif;
+    text-align:right !important;
+}

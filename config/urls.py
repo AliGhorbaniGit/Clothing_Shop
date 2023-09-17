@@ -16,18 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
 
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('pages.urls')),
-    path('account/', include('allauth.urls')),
-    path('cart/', include('cart.urls')),
-    path('order/', include('orders.urls')),
-    path('payment/', include('payment.urls')),
-    path('rosetta/', include('rosetta.urls')),
-]
-
-# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path('admin/', admin.site.urls),
+                  path('', include('pages.urls')),
+                  path('accounts/', include('allauth.urls')),
+                  path('cart/', include('cart.urls')),
+                  path('order/', include('orders.urls')),
+                  path('payment/', include('payment.urls')),
+                  path('rosetta/', include('rosetta.urls')),
+                  path('contactUs/', include('contactus.urls')),
+                  # path('contactUs/', TemplateView.as_view(template_name="contact_us.html"), name='contact_us'),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

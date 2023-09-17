@@ -1,0 +1,13 @@
+{% load i18n %}
+{% for user in users %}
+
+    <form action="{% url 'admin_to_user_contact' %}" method="POST">
+        {% csrf_token %}
+        <input name="user_id" value="{{ user.username.id }}">{{ user.username }}
+        <button> {% trans 'submit' %}</button>
+    </form>
+
+    <br>
+
+{% endfor %}
+

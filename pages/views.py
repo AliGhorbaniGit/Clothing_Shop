@@ -13,7 +13,7 @@ class ShowPackages(generic.ListView):
     """ A VIEW TO SHOW ALL PRODUCTS """
 
     model = Package
-    template_name = 'pages/home.html'
+    template_name = 'pages/package_view.html'
     context_object_name = 'package'
 
 
@@ -41,3 +41,5 @@ def package_detail_view(request, pk):
     return render(request, 'pages/package_view.html', {"package": package,
                                                        "comment": comment,
                                                        "comment_form": comment_form, "cart_form": cart_form})
+
+

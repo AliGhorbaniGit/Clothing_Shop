@@ -1,35 +1,46 @@
+{#{% extends '_base.html' %}#}
+{#{% load i18n %}#}
+{#{% load static %}#}
+{##}
+{##}
+{#{% if massages %}#}
+{#    {% for massage in massages %}#}
+{#        <P> {{ massage }} </p>#}
+{#    {% endfor %}#}
+{#{% endif %}#}
+{##}
+{##}
+{#{% block content %}#}
+{#    <br>#}
+{#    {% if user.is_authenticated %}#}
+{#        <a href="{% url 'account_logout' %}">{{ user.username }} <br> log out </a>#}
+{#        <br>#}
+{#        <a href="{% url 'account_change_password' %}">pass reset </a>#}
+{##}
+{#    {% else %}#}
+{#        <a href="{% url 'account_login' %}"> login </a>#}
+{#        <br>#}
+{#        <a href="{% url 'account_signup' %}"> sign up </a>#}
+{##}
+{#    {% endif %}#}
+{##}
+{#<a href="{% url 'cart_detail' %}">cart</a>#}
+{#    <br>#}
+{#    {% for pack in package %}#}
+{#        <a href="{{ pack.get_absolute_url }}">{{ pack.title }}</a>#}
+{#        <br>#}
+{#    {% endfor %}#}
+{#    <br>#}
+{##}
+{#{% endblock %}#}
+
+
 {% extends '_base.html' %}
-{% load i18n %}
-{% load static %}
 
-
-{% if massages %}
-    {% for massage in massages %}
-        <P> {{ massage }} </p>
-    {% endfor %}
-{% endif %}
-
+{% block page_title %}
+Home Page
+{% endblock %}
 
 {% block content %}
-    <br>
-    {% if user.is_authenticated %}
-        <a href="{% url 'account_logout' %}">{{ user.username }} <br> log out </a>
-        <br>
-        <a href="{% url 'account_change_password' %}">pass reset </a>
-
-    {% else %}
-        <a href="{% url 'account_login' %}"> login </a>
-        <br>
-        <a href="{% url 'account_signup' %}"> sign up </a>
-
-    {% endif %}
-
-<a href="{% url 'cart_detail' %}">cart</a>
-    <br>
-    {% for pack in package %}
-        <a href="{{ pack.get_absolute_url }}">{{ pack.title }}</a>
-        <br>
-    {% endfor %}
-    <br>
-
+<h1>Home Page</h1>
 {% endblock %}

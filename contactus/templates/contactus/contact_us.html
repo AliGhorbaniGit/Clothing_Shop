@@ -1,0 +1,217 @@
+{% load static %}
+{% load i18n %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{% static 'img/iconA.png' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'img/iconA.png' %}">
+
+    <title>{% trans 'contact us' %}</title>
+
+    <style>
+        body {
+            text-align: center;
+
+        }
+
+        .header {
+        {#border: 2px solid blue;#} margin-bottom: 10px;
+            color: #00ad9c;
+        {#border_radius: 5px;#}
+        }
+
+        .header > h1 {
+            background-color: #0b2e13;
+
+        }
+
+        .header > ul {
+            list-style: none;
+        }
+
+        .header > .alert {
+            color: red;
+        }
+
+        .header > .alert-success {
+            color: red !important;
+        }
+
+        .header > .alert-error {
+            color: orangered;
+        }
+
+
+        .content {
+            border: 2px solid orange;
+            min-height: 500px;
+            max-height: max-content;
+            overflow: scroll;
+            width: 50%;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px;
+        }
+
+        .content_holder {
+            border: 2px solid transparent;
+            margin: auto;
+        {#overflow: hidden;#} width: 90%;
+            color: white !important;
+        }
+
+        .content_holder > .user {
+            float: right;
+            {#border: 2px solid red;#}
+            width: 20%;
+            height: 40px;
+            text-align: center;
+            padding-top: 5px;
+            border-radius: 2px 2px 2px 20px;
+            background-color: #4ac1f7;
+            display: block;
+        }
+
+        .content_holder > .admin {
+            float: left;
+            {#border: 2px solid red;#}
+            width: 20%;
+            height: 40px;
+            text-align: center;
+            padding-top: 5px;
+            border-radius: 2px 2px 20px 2px;
+            background-color: #1e7e34;
+            display: block;
+        }
+
+        .text_holder {
+            display: block;
+            {#border: 2px solid red;#}
+            margin-top: 20%;
+            font-size: 21px;
+        }
+
+        .user_text {
+                        border-radius: 20px 2px 2px 20px;
+            direction: rtl;
+            margin: 0 2px 20px 2px;
+            width: 55%;
+            background-color: #4ac1f7;
+            float: right;
+            text-align: right;
+            padding-right: 15px;
+        }
+
+
+        .admin_text {
+            border-radius: 2px 20px 20px 2px;
+            margin: 5px 2px 20px 2px;
+            direction: ltr;
+            width: 55%;
+            background-color: #1e7e34;
+
+            text-align: left;
+            padding-left: 15px;
+        }
+
+        .user > form > button {
+            float: left;
+        }
+
+        .user > form > input {
+
+            height: 100px;
+        }
+
+        .admin {
+            float: left;
+            border: 2px solid red;
+        }
+
+
+        .footer {
+            border: 2px solid red;
+            margin: 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<header class="header">
+
+    <h1> Hello Dear {{ user.username }} , Here You Can Say Us What You Need </h1>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="alert alert-{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+</header>
+
+
+<div class="content">
+
+    <div class="content_holder">
+
+        <div class="user">
+            <img> user
+        </div>
+
+        <div class="admin">
+            <img src="{% static 'img/iconA.png' %}"> admin
+        </div>
+
+        {% if  contact %}
+            <div class="text_holder">
+                {% for text in contact %}
+                    <p class="user_text "> {{ text.user_text }}</p>
+                    <br>
+                    <p class="admin_text"> {{ text.admin_text }} </p>
+                {% endfor %}
+            </div>
+
+        {% endif %}
+        <form action="{% url 'user_to_admin_contact' %}" method="POST">
+            {% csrf_token %}
+            {#                {{ form }}#}
+
+            <input type="text" name="user_text">
+            {#                    {% if user.is_staff %}#}
+            {#                    <input type="text" name="admin_txt">#}
+            {#                    {% endif %}#}
+            <button> {% trans 'submit' %}</button>
+        </form>
+
+        {% if user.is_staff %}
+                <form action="{% url 'user_to_admin_contact' %}" method="POST">
+            {% csrf_token %}
+            {#                {{ form }}#}
+
+            <input type="text" name="admin_text">
+            {#                    {% if user.is_staff %}#}
+            {#                    <input type="text" name="admin_txt">#}
+            {#                    {% endif %}#}
+            <button> {% trans 'submit' %}</button>
+        </form>
+        {% endif %}
+
+    </div>
+
+</div>
+
+<a href="{% url 'admin_to_user_contact' %}"> adminnnn</a>
+
+<footer class="footer"></footer>
+
+</body>
+</html>

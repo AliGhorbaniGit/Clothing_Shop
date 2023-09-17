@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+import os
 from pathlib import Path
 
 
@@ -55,7 +56,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    "rosetta",
+    'rosetta',
+    'ckeditor',
+    'crispy_forms',
 
     # my apps :
     'accounts',
@@ -63,6 +66,8 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'orders',
     'payment',
+    'contactus',
+
 
 ]
 
@@ -152,12 +157,13 @@ LANGUAGES = (
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 #
 # # MEDIA
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media/'),
+MEDIA_URL = '/media/'
+MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -181,3 +187,14 @@ ACCOUNTS_UNIQUE_EMAIL = True
 
 # ZARINPAL_MERCHANT_ID
 ZARINPAL_MERCHANT_ID = env("DJANGO_ZARINPAL_MERCHANT_ID")
+
+# ck-editor
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# CRISPY_FORMS
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# STATIC
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))]
+

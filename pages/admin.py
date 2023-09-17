@@ -1,11 +1,16 @@
 from django.contrib import admin
-from django.utils.translation import gettext_lazy as _
 
 from .models import Package, Comment
 
 
+class CommentInline(admin.TabularInline):
+    model = Comment
+    fields = ['text', ]
+
+
 class PackageAdmin(admin.ModelAdmin):
     list_display = ['title', 'price']
+    inlines = [CommentInline, ]
 
 
 class CommentAdmin(admin.ModelAdmin):
