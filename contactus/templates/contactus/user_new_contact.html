@@ -1,0 +1,20 @@
+{% extends '_base.html' %}
+{% load i18n %}
+
+{% block content %}
+<p> " {{ users|length }} " : message to answer  </p>
+
+<ul class="messages">
+
+    {% for user in users %}
+        <li class="alert alert-success">
+            <a href="{% url 'admin_to_new_user_contact' user.id %}">{{ user.user }} </a>
+        </li>
+    {% endfor %}
+</ul>
+
+<br>
+
+
+{% endblock %}
+

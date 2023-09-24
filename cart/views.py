@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 from django.views.decorators.http import require_POST
 from django.utils.translation import gettext as _
 from django.contrib import messages
 
 from cart.cart import Cart
+from .favorite import Favorite
 from .forms import AddToCartForm
 from pages.models import Package
 
@@ -61,7 +63,7 @@ def add_to_cart_view(request, product_id):
         cart.add(product, quantity, replace_current_quantity)
         print('form is valid product added')
     print('im go to return')
-    return redirect('cart_detail')
+    return redirect('cart:cart_detail')
 
 
 def remove_from_cart(request, product_id):
@@ -82,3 +84,16 @@ def clear_cart(request):
     else:
         messages.warning(request, _('you have nothing in cart'))
     return redirect('cart_detail')
+
+
+
+def add_to_favorites(request, product_id):
+
+    # if user is authnrticated
+    #     stote in db
+    # else
+    #     stote in session
+    favorite = Favorite(request)
+
+    favorite.add(product_id)
+    return redirect('ShowPackages')

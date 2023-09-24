@@ -10,3 +10,20 @@ body {
     font-family:"IRANSansX", sans-serif;
     text-align:right !important;
 }
+
+.header-toolbar__btn{
+    list-style: none;
+}
+
+.header-toolbar{
+    list-style: none;
+}
+
+.page_number{
+     margin-left: 12px;
+}
+
+.page_number:hover{
+     color: red;
+    font-size:22px;
+}

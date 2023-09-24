@@ -1,14 +1,17 @@
+from urllib import request
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.middleware.csrf import CsrfViewMiddleware
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.template import RequestContext
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .forms import ContactForm
+from .forms import ContactForm, ContactUpdateForm
 from .contact import ContactUs
 from .models import ContactUs
 from accounts.models import CustomUser
@@ -81,19 +84,21 @@ def user_to_admin_contact(request, user_id=None):
     return render(request, 'contactus/contact_us.html', {"contact": contact})
 
 
-def admin_to_user_contact(request):
+def admin_to_user_new_contact(request):
     # contact = Contact.objects.get(user_name=request.user.id)
-    users = CustomUser.objects.all()
-    if request.method == 'POST':
-        user_id = request.POST.get('user_id')
+    # users = CustomUser.objects.all()
+    users = ContactUs.objects.filter(is_new=True)
+    if not users:
+        messages.success(request, 'All Contact message was Answered , no more to ')
 
-        user_to_admin_contact(request,user_id.id)
-        breakpoint()
-    else:
-        return render(request, 'contactus/admin_contact.html', {"users": users})
+    return render(request, 'contactus/user_new_contact.html', {"users": users})
 
 
-class AdminToUserContact(generic.UpdateView):
+class AdminToNewUserContact(generic.UpdateView):
+    pass
     template_name = 'contactus/admin_contact.html'
     model = ContactUs
-    fields = ('admin_text',)
+    form_class = ContactUpdateForm
+    context_object_name = 'contact'
+    # fields = ('admin_text', 'is_new')
+    # redirect(request, reverse('admin_to_user_new_contact'))

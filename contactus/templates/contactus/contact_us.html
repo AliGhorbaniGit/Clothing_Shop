@@ -20,13 +20,14 @@
         }
 
         .header {
-        {#border: 2px solid blue;#} margin-bottom: 10px;
-            color: #00ad9c;
-        {#border_radius: 5px;#}
+            margin-bottom: 10px;
+            color: white;
         }
 
         .header > h1 {
-            background-color: #0b2e13;
+            background-color: #0f74a8;
+            border-radius: 10px;
+            padding: 4px;
 
         }
 
@@ -48,95 +49,109 @@
 
 
         .content {
-            border: 2px solid orange;
             min-height: 500px;
-            max-height: max-content;
-            overflow: scroll;
             width: 50%;
             margin: 0 auto;
-            border-radius: 10px;
+            border-radius: 5px;
             box-shadow: 0 0 10px;
+            padding-top: 8px;
+            background-image: url({% static 'img/WallpapersNew.jpg' %});
         }
 
         .content_holder {
-            border: 2px solid transparent;
-            margin: auto;
-        {#overflow: hidden;#} width: 90%;
+            padding:2px 4px;
+            box-shadow: #0E2231 0 0 10px;
+            margin:auto ;
+            width: 90%;
+            min-height: 500px;
             color: white !important;
+            overflow: hidden;
+            border-radius: 3px;
+            font-size:22px;
         }
 
         .content_holder > .user {
             float: right;
-            {#border: 2px solid red;#}
-            width: 20%;
+            width: 25%;
             height: 40px;
             text-align: center;
-            padding-top: 5px;
+            padding-top: 10px;
             border-radius: 2px 2px 2px 20px;
-            background-color: #4ac1f7;
-            display: block;
+            {#background-color: #76d02c;#}
+            margin-bottom: 20px;
+            border-bottom: 2px solid  black;
+            color: red;
         }
 
         .content_holder > .admin {
+            color: orangered;
+            border: 0 solid transparent;
             float: left;
-            {#border: 2px solid red;#}
             width: 20%;
             height: 40px;
             text-align: center;
-            padding-top: 5px;
+            padding-top: 10px;
             border-radius: 2px 2px 20px 2px;
-            background-color: #1e7e34;
-            display: block;
+            {#background-color: #1e7e34;#}
+            border-bottom: 2px solid  black;
+
         }
 
         .text_holder {
-            display: block;
-            {#border: 2px solid red;#}
-            margin-top: 20%;
+            border: 2px solid transparent;
+            margin-top: 15%;
             font-size: 21px;
+            width: 100%;
+            min-height: 500px;
         }
 
-        .user_text {
-                        border-radius: 20px 2px 2px 20px;
-            direction: rtl;
-            margin: 0 2px 20px 2px;
-            width: 55%;
-            background-color: #4ac1f7;
+        .user_text{
+            color:black;
+            margin-left:80%;
+            border-bottom:1px dashed darkblue ;
+            padding: 2px;
+            border-radius: 4px;
+            box-shadow: #a6e22e 2px 4px;
+        }
+
+        .admin_text{
+            color:whitesmoke;
+            margin-right:80%;
+            padding: 2px;
+            border-radius: 4px;
+            box-shadow: #1e7e34 2px 4px;
+            border-bottom:1px dashed darkblue ;
+        }
+
+        .form_text {
+            border-bottom: 2px solid #0c1923;
+            border-radius: 5px;
+            min-height: 10%;
+            max-height: 200px;
+            min-width: 20%;
+            max-width: 35%;
             float: right;
-            text-align: right;
-            padding-right: 15px;
+            direction: rtl;
+            text-align: center;
+            padding-top: 15px;
         }
 
+        .form_send_button {
+            border-radius: 6px;
+            height: 48px;
+            margin:2px ;
+            background-color: red;
+            color: white;
+            float: right;
 
-        .admin_text {
-            border-radius: 2px 20px 20px 2px;
-            margin: 5px 2px 20px 2px;
-            direction: ltr;
-            width: 55%;
-            background-color: #1e7e34;
-
-            text-align: left;
-            padding-left: 15px;
         }
-
-        .user > form > button {
-            float: left;
-        }
-
-        .user > form > input {
-
-            height: 100px;
-        }
-
-        .admin {
-            float: left;
-            border: 2px solid red;
-        }
-
 
         .footer {
-            border: 2px solid red;
+            {#border: 2px solid red;#}
             margin: 10px;
+            height: 40px;
+            width:50%;
+            margin: auto;
         }
 
 
@@ -145,7 +160,7 @@
 <body>
 
 <header class="header">
-
+    {{ value|time:"H:i" }}
     <h1> Hello Dear {{ user.username }} , Here You Can Say Us What You Need </h1>
 
     {% if messages %}
@@ -164,52 +179,36 @@
     <div class="content_holder">
 
         <div class="user">
-            <img> user
+            <img> {{ user.username }}
         </div>
 
         <div class="admin">
             <img src="{% static 'img/iconA.png' %}"> admin
         </div>
 
-        {% if  contact %}
-            <div class="text_holder">
-                {% for text in contact %}
-                    <p class="user_text "> {{ text.user_text }}</p>
-                    <br>
-                    <p class="admin_text"> {{ text.admin_text }} </p>
-                {% endfor %}
-            </div>
 
-        {% endif %}
-        <form action="{% url 'user_to_admin_contact' %}" method="POST">
+        <div class="text_holder">
+            {% for text in contact %}
+                <p class="user_text "> {{ text.user_text }}</p>
+                <br>
+                <p class="admin_text "> {{ text.admin_text}}</p>
+            {% endfor %}
+        </div>
+
+
+        <form class="user_form" action="{% url 'user_to_admin_contact' %}" method="POST">
             {% csrf_token %}
-            {#                {{ form }}#}
+                        <textarea class="form_text " name="user_text" placeholder=".............type here"></textarea>
 
-            <input type="text" name="user_text">
-            {#                    {% if user.is_staff %}#}
-            {#                    <input type="text" name="admin_txt">#}
-            {#                    {% endif %}#}
-            <button> {% trans 'submit' %}</button>
+            <button class=" form_send_button"> {% trans 'send' %}</button>
         </form>
+    </div>
 
-        {% if user.is_staff %}
-                <form action="{% url 'user_to_admin_contact' %}" method="POST">
-            {% csrf_token %}
-            {#                {{ form }}#}
-
-            <input type="text" name="admin_text">
-            {#                    {% if user.is_staff %}#}
-            {#                    <input type="text" name="admin_txt">#}
-            {#                    {% endif %}#}
-            <button> {% trans 'submit' %}</button>
-        </form>
-        {% endif %}
-
+    <div class="data-form">
     </div>
 
 </div>
 
-<a href="{% url 'admin_to_user_contact' %}"> adminnnn</a>
 
 <footer class="footer"></footer>
 

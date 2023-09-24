@@ -15,7 +15,7 @@ class Package(models.Model):
 
     title = models.CharField(max_length=300, verbose_name=_('title'))
     price = models.PositiveIntegerField(blank=True, verbose_name=_('price'))
-    image = models.ImageField(blank=True, upload_to='media/image', verbose_name=_('image'))
+    image = models.ImageField(blank=True, upload_to='image', verbose_name=_('image'))
     description = RichTextField(blank=True, verbose_name=_('description'))
     data_created = models.DateTimeField(auto_now_add=True, verbose_name=_('date created'))
 

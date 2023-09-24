@@ -1,88 +1,45 @@
-{#<!doctype html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <meta name="viewport"#}
-{#          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">#}
-{#    <meta http-equiv="X-UA-Compatible" content="ie=edge">#}
-{#    <title>LOGIN</title>#}
-{#</head>#}
-{#<body>#}
-{##}
-{#<form method="POST">#}
-{#    {% csrf_token %}#}
-{#    {{ form.as_p }}#}
-{#    <button> submit </button>#}
-{#</form>#}
-{##}
-{#</body>#}
-{#</html>#}
 
+{% extends '_base.html' %}
 
+{% load crispy_forms_tags %}
 
+{% block page_title %}
+    Login
+{% endblock %}
 
+{% block content %}
+    <h1>Log In</h1>
 
-{#{% extends '_base.html' %}#}
-{##}
-{#{% load crispy_forms_tags %}#}
-{##}
-{#{% block page_title %}#}
-{#    Login#}
-{#{% endblock %}#}
-{##}
-{#{% block content %}#}
-{#    <h1>Log In</h1>#}
-{##}
-{#    <form action="" method="post">#}
-{#        {% csrf_token %}#}
-{#        {{ form }}#}
-{#        <input type="submit" value="Log In">#}
-{#    </form>#}
-{#{% endblock %}#}
-
-
-
-
-
-
-
-
-{% load static %}
-{% load i18n %}
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>{% translate ' log in ' %}</title>
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
-</head>
-<body>
-
-
-<div class="holder">
     <form action="" method="post">
         {% csrf_token %}
-        <span style="">
-              <ul class="errorlist nonfield"><li></li></ul>
-            <label for="id_login"></label>
-              <input type="text" name="login" value="" placeholder="{% translate 'USER NAME' %}"
-                     autocomplete="username"
-                     maxlength="150" required="" id="id_login" class="info">
-            <label for="id_password"></label>
-              <input type="password" name="password" placeholder="{% translate ' PASSWORD ' %}" autocomplete="current-password" required=""
-                     id="id_password" class="info">
-            <label class="label_remember" for="id_remember">{% translate 'Remember Me' %}:</label>
-              <input type="checkbox" name="remember" id="id_remember">
-            </span>
-        <input type="submit" class="sub " value="{% translate ' LOG IN ' %}">
+        {{ form }}
+        <input type="submit" value="Log In">
     </form>
-</div>
+{% endblock %}
 
+
+
+
+
+{#<div class="holder">#}
+{#    <form action="" method="post">#}
+{#        {% csrf_token %}#}
+{#        <span style="">#}
+{#              <ul class="errorlist nonfield"><li></li></ul>#}
+{#            <label for="id_login"></label>#}
+{#              <input type="text" name="login" value="" placeholder="{% translate 'USER NAME' %}"#}
+{#                     autocomplete="username"#}
+{#                     maxlength="150" required="" id="id_login" class="info">#}
+{#            <label for="id_password"></label>#}
+{#              <input type="password" name="password" placeholder="{% translate ' PASSWORD ' %}" autocomplete="current-password" required=""#}
+{#                     id="id_password" class="info">#}
+{#            <label class="label_remember" for="id_remember">{% translate 'Remember Me' %}:</label>#}
+{#              <input type="checkbox" name="remember" id="id_remember">#}
+{#            </span>#}
+{#        <input type="submit" class="sub " value="{% translate ' LOG IN ' %}">#}
+{#    </form>#}
+{#</div>#}
 
 {#<a href="{% url 'password_reset' %}">password forgot</a>#}
 {#<a href="{% url 'signup' %}">sign up </a>#}
-
-
-</body>
-</html>
+#}

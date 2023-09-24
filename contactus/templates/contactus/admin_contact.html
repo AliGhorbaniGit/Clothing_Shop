@@ -1,13 +1,210 @@
+{% load static %}
 {% load i18n %}
-{% for user in users %}
 
-    <form action="{% url 'admin_to_user_contact' %}" method="POST">
-        {% csrf_token %}
-        <input name="user_id" value="{{ user.username.id }}">{{ user.username }}
-        <button> {% trans 'submit' %}</button>
-    </form>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{% static 'img/iconA.png' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'img/iconA.png' %}">
 
-    <br>
+    <title>{% trans 'contact us' %}</title>
 
-{% endfor %}
+    <style>
+        body {
+            text-align: center;
 
+        }
+
+        .header {
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .header > h1 {
+            background-color: #0f74a8;
+            border-radius: 10px;
+            padding: 4px;
+
+        }
+
+        .header > ul {
+            list-style: none;
+        }
+
+        .header > .alert {
+            color: red;
+        }
+
+        .header > .alert-success {
+            color: red !important;
+        }
+
+        .header > .alert-error {
+            color: orangered;
+        }
+
+
+        .content {
+            min-height: 500px;
+            width: 50%;
+            margin: 0 auto;
+            border-radius: 5px;
+            box-shadow: 0 0 10px;
+            padding-top: 8px;
+            background-image: url({% static 'img/WallpapersNew.jpg' %});
+        }
+
+        .content_holder {
+            padding: 2px 4px;
+            box-shadow: #0E2231 0 0 10px;
+            margin: auto;
+            width: 90%;
+            min-height: 500px;
+            color: white !important;
+            overflow: hidden;
+            border-radius: 3px;
+            font-size: 22px;
+        }
+
+        .content_holder > .admin {
+            float: right;
+            width: 25%;
+            height: 40px;
+            text-align: center;
+            padding-top: 10px;
+            border-radius: 2px 2px 2px 20px;
+        {#background-color: #76d02c;#} margin-bottom: 20px;
+            border-bottom: 2px solid black;
+            color: red;
+        }
+
+        .content_holder > .user {
+            color: orangered;
+            border: 0 solid transparent;
+            float: left;
+            width: 20%;
+            height: 40px;
+            text-align: center;
+            padding-top: 10px;
+            border-radius: 2px 2px 20px 2px;
+        {#background-color: #1e7e34;#} border-bottom: 2px solid black;
+
+        }
+
+        .text_holder {
+            border: 2px solid transparent;
+            margin-top: 15%;
+            font-size: 21px;
+            width: 100%;
+            min-height: 500px;
+        }
+
+        .user_text {
+            color: black;
+            margin-right: 80%;
+            border-bottom: 1px dashed darkblue;
+            padding: 2px;
+            border-radius: 4px;
+            box-shadow: #a6e22e 2px 4px;
+        }
+
+        .admin_text {
+            color: whitesmoke;
+            margin-left: 80%;
+            padding: 2px;
+            border-radius: 4px;
+            box-shadow: #1e7e34 2px 4px;
+            border-bottom: 1px dashed darkblue;
+        }
+
+        .form_text {
+            border-bottom: 2px solid #0c1923;
+            border-radius: 5px;
+            min-height: 10%;
+            max-height: 200px;
+            min-width: 20%;
+            max-width: 35%;
+            float: right;
+            direction: rtl;
+            text-align: center;
+            padding-top: 15px;
+        }
+
+        .form_send_button {
+            border-radius: 6px;
+            height: 48px;
+            margin: 2px;
+            background-color: red;
+            color: white;
+            float: right;
+
+        }
+
+        .footer {
+        {#border: 2px solid red;#} margin: 10px;
+            height: 40px;
+            width: 50%;
+            margin: auto;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<header class="header">
+
+    <h1> Hello Dear {{ user.username }} {{ time|time:"H:i" }}</h1>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="alert alert-{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+</header>
+
+
+<div class="content">
+
+    <div class="content_holder">
+
+        <div class="user">
+            <img> {{ user.username }}
+        </div>
+
+        <div class="admin">
+            <img src="{% static 'img/iconA.png' %}"> admin
+        </div>
+
+
+        <div class="text_holder">
+                <p class="user_text "> {{ contact.user_text }}</p>
+                <br>
+        </div>
+
+        <form class="user_form" action="{% url 'admin_to_new_user_contact' contact.id %}" method="POST">
+            {% csrf_token %}
+            <textarea class="form_text " name="admin_text" placeholder=".............type here"></textarea>
+            <button class=" form_send_button"> {% trans 'send' %}</button>
+            <input name="is_new" type="hidden" value="False"/>
+        </form>
+
+    </div>
+
+    <div class="data-form">
+    </div>
+
+</div>
+
+
+<footer class="footer"></footer>
+
+</body>
+</html>

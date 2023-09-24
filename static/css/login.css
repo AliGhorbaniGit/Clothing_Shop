@@ -1,4 +1,4 @@
-.holder {
+.login_form > .holder {
     border: 1px solid grey;
     width: 30%;
     position: absolute;
@@ -10,7 +10,7 @@
     background: indigo;
 }
 
-.info {
+.login_form >.info {
     width: 40%;
     height: 80px;
     margin: 40px 0px 20px 26px;
@@ -21,12 +21,12 @@
     border-radius: 35px 35px 2px 2px;
 }
 
-.label_remember {
+.login_form >.label_remember {
     margin-left: 150px;
     text-align: center;
 }
 
-.sub {
+.login_form >.sub {
     width: 25%;
     height: 30px;
     text-align: center;
@@ -37,7 +37,7 @@
     border-radius: 2px 2px 25px 25px;
 }
 
-li {
+.login_form >li {
     color: #ba2121;
     box-shadow: 0 -2px 3px 1px #003366;
     border-radius: 2px 2px 25px 25px;
