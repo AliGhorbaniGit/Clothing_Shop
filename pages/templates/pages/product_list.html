@@ -43,7 +43,8 @@
                                                             <div class="ShoppingYar-product-action">
                                                                 <div class="product-action d-flex">
                                                                     <a href="{% url 'cart:favoriteAdd' package.id %}" class="action-btn">
-                                                                        <i class="flaticon flaticon-like"></i>
+
+                                                                        <i class="flaticon flaticon-like" ></i>
                                                                     </a>
                                                                 </div>
                                                             </div>
@@ -120,7 +121,7 @@
         <div class="searchform__popup" id="searchForm">
             <a href="{% url 'package_search_view' %}" class="btn-close"><i class="flaticon flaticon-cross"></i></a>
             <div class="searchform__body">
-                <p>در باکس زیر عبارت خود را وارد کنید</p>
+                <p>در باکس زیر عبارت خود را وارد کنید , بیش از 2 کاراکتر وارد کنید </p>
                 <form method="POST" action="{% url 'package_search_view' %}">
                     {% csrf_token %}
                     <input type="text" name="text" id="popup-search" class="searchform__input"

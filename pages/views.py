@@ -20,6 +20,16 @@ class ShowPackages(generic.ListView):
     # popup_search = Package.objects.get(popup_search.value)
 
 
+def show_all_package(request, search=None):
+    if search is not None:
+        package = Package.objects.filter(id__in=search)
+        return render(request, 'pages/product_list.html', {'package': package, })
+
+    else:
+        package = Package.objects.all()
+        return render(request, 'pages/product_list.html', {'package': package, })
+
+
 def package_detail_view(request, pk):
     """ THIS VIEW IS TO SHOW A PRODUCT AND ITS DETAIL"""
 
@@ -47,19 +57,72 @@ def package_detail_view(request, pk):
 
 
 def package_search_view(request):
-    poll = request.POST.get('text')
-    print(f"{poll}*************")
+    search_input = request.POST.get('text')
+    print(f"{search_input}*************")
     try:
-        search = Package.objects.get(title=poll)
-    except :
-        search=None
-    if search:
-        print('***********hi')
+        if len(search_input) > 2:
 
-        print(f"*************{search}")
-        return redirect('package_detail_view', search.id)
+            all_package = Package.objects.all()
+            print('++++++++++++++++++')
+
+            result = []
+            symbol = []
+            for package in all_package:  # must be 0
+                print('2222222222222222222222')
+                print(package)
+                # package = num
+                # symbol += search_input[letter]
+                counter = 0
+                for item in range(0, 3):
+                    print('33333333333333333333333333')
+                    if package.title[item] == search_input[item]:
+                        counter += 1
+                        print('444444444444')
+                    if counter > 2:
+                        print('555555555555555')
+                        result.append(package.id)
+            print('////////////////////////////')
+            print(result)
+
+        # return result
+        else:
+            result = None
+
+
+    except :
+        print('uuuuuuuuuuuuuuuuuuuuuuuuuuu')
+        result = None
+
+    if result:
+
+        print(f"*************{search_input}")
+        return show_all_package(request, search=result)
 
     else:
-        messages.success(request, _(f' no result for  {poll} , maybe have a syntax error :) '))
+        if len(search_input) < 3:
+            messages.success(request, _('enter more than 2 character'))
+            return redirect('ShowPackages')
 
-        return redirect('ShowPackages')
+        else:
+            messages.success(request, _(f' no result for  {search_input} ) '))
+            return redirect('ShowPackages')
+
+    # search_input  = request.POST.get('text')
+    # print(f"{search_input}*************")
+    # try:
+    #     search = Package.objects.get(title=search_input)
+    #     print('++++++++++++++++++')
+    #     print(search_input[0])
+    #
+    # except Package.DoesNotExist :
+    #     search=None
+    # if search:
+    #     print('***********hi')
+    #
+    #     print(f"*************{search}")
+    #     return redirect('package_detail_view', search.id)
+    #
+    # else:
+    #     messages.success(request, _(f' no result for  {poll} , maybe have a syntax error :) '))
+    #
+    #     return redirect('ShowPackages')

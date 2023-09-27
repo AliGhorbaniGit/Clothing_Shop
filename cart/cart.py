@@ -120,5 +120,5 @@ class Cart:
 
     def is_empty(self):
         if self.cart:
-            return False
-        return True
+            return True
+        return False

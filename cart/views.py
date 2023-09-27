@@ -25,9 +25,9 @@ def cart_detail_view(request):
         print()
         return render(request, 'cart/cart_detail.html', {'cart': cart})
     else:
-        messages.success(request,'cart is empty')
         print('the products that you added , now deleted ')
         return render(request, 'cart/cart_detail.html')
+
 
 # def cart_detail_view(request):
 #
@@ -83,12 +83,10 @@ def clear_cart(request):
         messages.success(request, _('your cart get empy'))
     else:
         messages.warning(request, _('you have nothing in cart'))
-    return redirect('cart_detail')
-
+    return redirect('cart:cart_detail')
 
 
 def add_to_favorites(request, product_id):
-
     # if user is authnrticated
     #     stote in db
     # else
@@ -97,3 +95,16 @@ def add_to_favorites(request, product_id):
 
     favorite.add(product_id)
     return redirect('ShowPackages')
+
+
+def favorites_list(request):
+    favorite = Favorite(request)
+    if favorite.is_empty() or False:
+        messages.success(request, _('your wish list is empty '))
+        return redirect('ShowPackages')
+    # favorite.clear()
+    # favorite.save()
+    product_ids = favorite
+    favorites = Package.objects.filter(id__in=product_ids)
+
+    return render(request, 'pages/wishlist.html', {'favorites': favorites})
