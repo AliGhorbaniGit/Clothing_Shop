@@ -22,7 +22,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-      path('admin/', admin.site.urls,),
+      path('admin/', admin.site.urls, ),
       path('', include('pages.urls')),
       path('accounts/', include('allauth.urls')),
       path('cart/', include('cart.urls')),
@@ -30,5 +30,7 @@ urlpatterns = [
       path('payment/', include('payment.urls')),
       path('rosetta/', include('rosetta.urls')),
       path('contactUs/', include('contactus.urls')),
-      # path('contactUs/', TemplateView.as_view(template_name="contact_us.html"), name='contact_us'),
+      path('aboutme/', TemplateView.as_view(template_name="aboutme.html"), name='aboutme'),
+      path('rules/', TemplateView.as_view(template_name="rules.html"), name='rules'),
+
   ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

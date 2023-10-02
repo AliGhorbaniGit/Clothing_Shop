@@ -12,6 +12,7 @@ from orders.models import Order
 
 
 def payment_process(request):
+    print("im in payment process")
     # GET ORDER ID FROM SESSION :
     order_id = request.session.get('order_id')
     # GET THE ORDER OBJECT

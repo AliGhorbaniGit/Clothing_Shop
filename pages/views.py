@@ -1,9 +1,9 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.views import generic
 from django.utils.translation import gettext as _
+
 
 from .models import Package
 from .forms import CommentForm
@@ -17,7 +17,6 @@ class ShowPackages(generic.ListView):
     template_name = 'pages/product_list.html'
     context_object_name = 'package'
     paginate_by = 8
-    # popup_search = Package.objects.get(popup_search.value)
 
 
 def show_all_package(request, search=None):
@@ -59,6 +58,14 @@ def package_detail_view(request, pk):
 def package_search_view(request):
     search_input = request.POST.get('text')
     print(f"{search_input}*************")
+    try:
+        print('1111111111111111111')
+        first_search = Package.objects.get(title=search_input)
+        print('------------------------------')
+        return redirect(reverse('package_detail_view', args=[first_search.id]))
+    except :
+        pass
+
     try:
         if len(search_input) > 2:
 
@@ -107,22 +114,6 @@ def package_search_view(request):
             messages.success(request, _(f' no result for  {search_input} ) '))
             return redirect('ShowPackages')
 
-    # search_input  = request.POST.get('text')
-    # print(f"{search_input}*************")
-    # try:
-    #     search = Package.objects.get(title=search_input)
-    #     print('++++++++++++++++++')
-    #     print(search_input[0])
-    #
-    # except Package.DoesNotExist :
-    #     search=None
-    # if search:
-    #     print('***********hi')
-    #
-    #     print(f"*************{search}")
-    #     return redirect('package_detail_view', search.id)
-    #
-    # else:
-    #     messages.success(request, _(f' no result for  {poll} , maybe have a syntax error :) '))
-    #
-    #     return redirect('ShowPackages')
+
+def profile_view(request):
+    pass

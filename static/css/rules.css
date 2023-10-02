@@ -1,0 +1,85 @@
+
+body {
+    text-align: center;
+
+}
+
+.header {
+    margin-bottom: 10px;
+    color: white;
+}
+
+.header > h1 {
+    background-color: #0f74a8;
+    border-radius: 10px;
+    padding: 4px;
+
+}
+
+.header > ul {
+    list-style: none;
+}
+
+
+.content {
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px;
+    padding-top: 8px;
+    background-image: url({% static 'img/WallpapersNew.jpg' %});
+
+}
+
+.content_holder {
+    box-shadow: #0E2231 0 0 10px;
+    margin: auto;
+    width: 90%;
+    color: white !important;
+    overflow: hidden;
+    border-radius: 3px;
+    font-size: 22px;
+}
+
+.text_holder {
+    border: 2px solid transparent;
+    margin-top: 15%;
+    font-size: 21px;
+    width: 100%;
+    min-height: 500px;
+
+}
+
+img {
+    width: 100%;
+
+}
+
+.content > .content_holder > .text_holder > .rules {
+    float: right;
+    width: 46%;
+    padding: 5px;
+    color: black;
+    background-color: green;
+    border-radius: 10px;
+    height: 350px;
+}
+
+
+.content > .content_holder > .text_holder > .policies {
+    float: left;
+    width: 46%;
+    padding: 5px;
+    color: black;
+    background-color: yellow;
+    border-radius: 10px;
+    height: 350px;
+}
+
+
+.footer {
+    margin: 10px;
+    height: 40px;
+    width: 50%;
+    margin: auto;
+}

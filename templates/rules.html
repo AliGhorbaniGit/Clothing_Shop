@@ -1,0 +1,74 @@
+{% load static %}
+{% load i18n %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{% static 'img/iconA.png' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'img/iconA.png' %}">
+    <link rel="stylesheet" href="{% static 'css/rules.css' %}">
+
+    <title>{% trans 'Rules And Policies' %}</title>
+
+</head>
+<body>
+
+<header class="header">
+
+
+</header>
+
+
+<div class="content">
+
+    <div class="content_holder">
+
+        <div class="rules_img">
+            <img src="{% static 'img/Rules.png' %}">
+        </div>
+
+
+        <div class="text_holder">
+            <p class="policies "> What are Policies?
+                The general statements that guide thinking and channel energy toward a particular direction are known as
+                Policies.
+                Policies are a type of Standing Plan and they provide a basis for interpreting strategy.
+                A manager uses policies at his discretion.
+                E.g. Decisions taken under recruitment policy can be in the case of recruiting employees for a new
+                division,
+                such as whether to recruit from the existing employees or to explore other external sources of
+                recruitment,
+                various policies under it regarding the salary structure, etc.
+                A policy is used by organizations as a guide that avoids confusion and provides a structured and unified
+                framework.
+
+
+            </p>
+
+            <p class="rules "> What are Rules?
+                Specific statements that inform what must and must not be done are known as Rules.
+                They are formed to maintain, regulate and control the working environment.
+                They are rigid and do not allow flexibility.
+                If rules are violated, then strict disciplinary actions are taken.
+                It reflects decisions that certain actions must and must not be taken.
+                They are the simplest type of plan which do not require changes from time to time.</p>
+
+        </div>
+
+        <a href="{% url 'ShowPackages' %}"> Back To Home </a>
+
+    </div>
+
+
+</div>
+
+
+<footer class="footer">
+</footer>
+
+</body>
+</html>

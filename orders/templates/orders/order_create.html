@@ -1,20 +1,25 @@
 {#{% extends '_base.html' %}#}
 {#{% block content %}#}
-{#    {% if order_from.errors %}#}
+{#    {% if from.errors %}#}
 {#        {% for err in errors %}#}
-{#            <p>err</p>#}
+{#            <h1>err</h1>#}
 {#        {% endfor %}#}
 {#    {% endif %}#}
 {#    your order :#}
 {#    <form action="" method="POST">#}
 {#        {% csrf_token %}#}
 {#        {{ order_form.as_p }}#}
+{#{{ order_from.errors }}#}
+{#        <input name="first_name">#}
+{#        <input name="last_name">#}
+{#        <input name="phone_number">#}
+{#        <input name="address">#}
+{#        <input name="order_notes">#}
 {#        <button type="submit"> sub</button>#}
 {#    </form>#}
 {##}
 {#{% endblock %}#}
-
-
+{##}
 
 
 {% extends '_base.html' %}
@@ -25,6 +30,7 @@
 {% load humanize %}
 
 {% block content %}
+
     <!-- Main Content Wrapper Start -->
     <div class="main-content-wrapper">
 

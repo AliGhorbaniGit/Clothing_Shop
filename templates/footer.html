@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <!-- Footer Start-->
 <footer class="footer">
@@ -13,9 +14,14 @@
                     </div>
                     <div class="footer-widget mb--50 pb--1">
                         <ul class="footer-menu">
-                            <li><a href="">درباره ما</a></li>
-                            <li><a href="">قوانین و مقررات</a></li>
-                            <li><a href="">تماس با ما</a></li>
+                            <li><a href="{% url 'aboutme' %}"> {% trans 'About Me' %}</a></li>
+                            <br>
+                            <br>
+                            <li>
+                                <a href="{% url 'rules' %}"> {% trans 'Rules And Policies' %}  <br>
+                                    <img height="12%" width="13%" src="{% static 'img/Rules.png' %} ">
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div class="footer-widget">

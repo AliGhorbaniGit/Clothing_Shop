@@ -11,6 +11,7 @@ from cart.cart import Cart
 
 @login_required
 def order_create_view(request):
+    print( "11111111111111111")
     order_form = OrderForm()
     cart = Cart(request)
     print('*********************im in create order')
@@ -19,10 +20,11 @@ def order_create_view(request):
         messages.warning(request, _('u must add some product first'))
         return redirect('ShowPackages')
     if request.method == 'POST':
-        print('in in not len')
+        print('+++++++++++++++++++in ')
         order_form = OrderForm(request.POST)
         print('*******************in request.method == post')
         if order_form.is_valid():
+            print("222222222222")
             order_obj = order_form.save(commit=False)
             order_obj.user = request.user
             order_obj.save()
@@ -47,5 +49,10 @@ def order_create_view(request):
             print('payment is ok')
             return redirect('payment_process')
 
+        else:
+            print('form not valid')
+            messages.error(request, _('some error in information'))
+            return render(request, 'orders/order_create.html',
+                          {'order_form': order_form, })
     return render(request, 'orders/order_create.html',
                   {'order_form': order_form, })
