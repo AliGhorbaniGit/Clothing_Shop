@@ -25,9 +25,9 @@
 {% extends '_base.html' %}
 
 {% load i18n %}
-{% load crispy_forms_tags %}
-{% load persian_translation_tags %}
-{% load humanize %}
+{#{% load crispy_forms_tags %}#}
+{#{% load persian_translation_tags %}#}
+{#{% load humanize %}#}
 
 {% block content %}
 
@@ -123,9 +123,11 @@
                                         {% for item in cart %}
                                             <tr>
                                                 <th>{{ item.product_obj.title }}
-                                                     <strong><span>&#10005;</span> {{ item.quantity|translate_number }}</strong>
+{#                                                     <strong><span>&#10005;</span> {{ item.quantity|translate_number }}</strong>#}
+                                                    <strong><span>&#10005;</span> {{ item.quantity }}</strong>
                                                 </th>
-                                                <td class="text-right">{{ item.product_obj.price|intcomma:False|translate_number }} {% translate '$' %}</td>
+{#                                                <td class="text-right">{{ item.product_obj.price|intcomma:False|translate_number }} {% translate '$' %}</td>#}
+                                            <td class="text-right">{{ item.product_obj.price}} {% translate '$' %}</td>
                                             </tr>
                                         {% endfor %}
 
@@ -133,7 +135,8 @@
                                     <tfoot>
                                         <tr class="cart-subtotal">
                                             <th>مجموع</th>
-                                            <td class="text-right">{{ cart.get_total_price|intcomma:False|translate_number }} {% translate '$' %}</td>
+{#                                            <td class="text-right">{{ cart.get_total_price|intcomma:False|translate_number }} {% translate '$' %}</td>#}
+                                            <td class="text-right">{{ cart.get_total_price }} {% translate '$' %}</td>
                                         </tr>
                                     </tfoot>
                                 </table>

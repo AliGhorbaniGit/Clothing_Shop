@@ -72,7 +72,7 @@ def remove_from_cart(request, product_id):
 
     cart.remove(product)
 
-    return redirect('cart_detail')
+    return redirect('cart:cart_detail')
 
 
 def clear_cart(request):

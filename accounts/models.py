@@ -12,6 +12,7 @@ class CustomUser(AbstractUser):
     last_name = models.CharField(max_length=30, blank=True, verbose_name=_('Last Name'))
     password = models.CharField(verbose_name=_('Password'))
     email = models.EmailField(verbose_name=_('Email'))
-    number = PhoneNumberField(blank=True, verbose_name=_('Phone Number'))
+    # number = PhoneNumberField(blank=True, verbose_name=_('Phone Number'))
+    number = models.IntegerField(blank=True, verbose_name=_('Phone Number'))
     is_staff = models.BooleanField(default=False, verbose_name=_('is_Staff'))
     data_joined = models.DateTimeField(auto_now_add=True, verbose_name=_('Date Joined'))
