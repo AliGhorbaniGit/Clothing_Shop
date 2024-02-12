@@ -1,14 +1,11 @@
 from django.contrib import admin
 
-# from .contact import ContactUs
 from .models import ContactUs
 
 
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ['user', ]
-# class ContactAdmin(admin.ModelAdmin):
-#     pass
+    list_display = ['user', 'is_new',
+                    'user_sent_date_time', ]
 
 
-# admin.site.register(ContactUs, ContactAdmin)
 admin.site.register(ContactUs, ContactAdmin)

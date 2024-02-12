@@ -2,19 +2,37 @@
 {% load i18n %}
 
 {% block content %}
-<p> " {{ users|length }} " : message to answer  </p>
-
-<ul class="messages">
-
-    {% for user in users %}
-        <li class="alert alert-success">
-            <a href="{% url 'admin_to_new_user_contact' user.id %}">{{ user.user }} </a>
-        </li>
-    {% endfor %}
-</ul>
-
+    <p class="btn btn-fullwidth btn-bg-red btn-color-white btn-hover-2"> " {{ contact|length }} " : user message to answer </p>
 <br>
+    <ul class="messages">
 
+        {% for new_contact in contact %}
+            <li class="alert alert-success ">
+                <a class="btn btn-fullwidth btn-bg btn-color-red btn-hover-2" href="{% url 'contactus:admin_answer_contact' new_contact.id %}">{{ new_contact.user }} </a>
+            </li>
+        {% endfor %}
 
+    </ul>
+
+    <br>
+    <br>
+
+    <p class="btn btn-fullwidth btn-bg-red btn-color-white btn-hover-2"> " {{ admin_awareness|length }} " : products get empty of quantity  </p>
+    <br>
+    <ul class="messages">
+        {% for new_awar in admin_awareness %}
+
+            <li class=" alert alert-success ">
+            <form action="{% url 'shop:admin_awareness_check' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="admin_awareness_id" value="{{ new_awar.id}}">
+                <input type="hidden" name="product_id" value="{{ new_awar.access_way}}">
+                <button class="btn btn-fullwidth btn-bg btn-color-red btn-hover-2" type="submit">{{ new_awar.subject }} </button>
+            </form>
+
+{#                <a href="{% url 'shop:product_detail'  %}"> </a>#}
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
 

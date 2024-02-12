@@ -1,0 +1,40 @@
+
+DO :
+if you want to use the reset pass or recieve email so set yoy email address and password in env file
+
+    when i want to edit profile information's , if i had a image , the interface(html) will be corrupt
+
+    from phonenumber_field.modelfields import PhoneNumberField
+
+    when i use offer in product and other int in my models , is there true to use them without inverting ??
+
+    i can use this to change site language :
+    in settings : language = a_function in a view
+    in that view get the language from user and tamamm :) ??
+
+    check master hoseini files to see what differences
+
+    for deploy to host remove null=True from account/models/number_field
+
+    why ny user creation form don work ?
+
+    after change password its dont get hashed and save directly
+
+    write the options of my site in some file like , readme.txt , to attract compony bose
+
+    add to git repository
+
+    I should change it in payment/views, when i not in develop mod and deploy site happened
+    'callback_url': 'http://127.0.0.1:8000' + reverse('payment_callback') :
+
+    security
+
+    secret-key in car_wheels in git
+
+    a view for contact us and a number or tel , ..., company address, bisines sentense like zan zendegi azadi
+
+    code cpacha , repadly questions,
+    
+
+DONE :
+

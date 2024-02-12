@@ -1,15 +1,15 @@
+from copy import deepcopy
 from django.utils.translation import gettext as _
 from django.contrib import messages
 
-from pages.models import Package
+from shop.models import Product
 
 
 class Favorite:
     def __init__(self, request):
-        """    Initialize the cart  """
+        """    Initialize the Favorite  """
 
         self.request = request
-
         self.session = request.session
 
         favorites = self.session.get('favorites')
@@ -20,11 +20,10 @@ class Favorite:
         self.favorites = favorites
 
     def add(self, product_id):
-        """    Add the specified product to the cart if it exists     """
+        """    Add the specified product to the Favorite if it exists     """
 
         if product_id not in self.favorites.values():
             self.favorites[product_id] = product_id
-            print('in add 1')
             messages.success(self.request, _('Product successfully added to your favorite'))
 
         else:
@@ -39,27 +38,18 @@ class Favorite:
         self.session.modified = True
 
     def __iter__(self):
-        """ make the cart iterable   """
-        favorites = self.favorites
-        print('im in iter')
+        """ make the Favorite iterable   """
+
+        favorites = deepcopy(self.favorites)
+
         for id_product in favorites:
-            print('im in iter and for')
-
-            product = Package.objects.filter(id=id_product)
-
+            product = Product.objects.filter(id=id_product)
             if product:
                 pass
 
             else:
-                product_id = str(id_product)
-                del self.favorites[product_id]
+                del self.favorites[str(id_product)]
                 self.save()
-                break
-
-            if len(favorites.keys()) == 0:
-                self.clear()
-                self.save()
-                return False
 
         product_ids = favorites.values()
 
@@ -67,12 +57,11 @@ class Favorite:
             yield item
 
     def __len__(self):
-        print('im in len')
+
         favorites = self.favorites
         if favorites:
             return len(favorites)
         else:
-            print('#######################in len there is no cart')
             return False
 
     def clear(self):

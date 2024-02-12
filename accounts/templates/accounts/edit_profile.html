@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+{% load i18n %}
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- style css -->
+    <link rel="stylesheet" href="{% static 'css/edit_profile.css' %}">
+    <title> {% translate "Edit information's" %} </title>
+
+
+</head>
+<body>
+
+<div class="content">
+
+    <div class="holder">
+
+        <div>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit"> Submit</button>
+            </form>
+
+            <a href="{% url 'shop:product_list' %}">{% translate 'Home' %}</a>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+</body>
+</html>

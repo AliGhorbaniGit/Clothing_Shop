@@ -1,45 +1,40 @@
+<!doctype html>
+<html lang="en">
+{% load i18n %}
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- style css -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <title>{% translate 'Sign Up' %}</title>
 
-{% extends '_base.html' %}
+</head>
+<body>
 
-{% load crispy_forms_tags %}
+<div class="content">
 
-{% block page_title %}
-    Login
-{% endblock %}
+    <div class="holder">
 
-{% block content %}
-    <h1>Log In</h1>
+        <div>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit"> {% translate 'Login' %} </button>
+            </form>
 
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Log In">
-    </form>
-{% endblock %}
+            <a href="{% url 'account_reset_password' %}">{% translate 'Forget Your Password ?' %}</a>
+            <a href="{% url 'account_signup' %}">{% translate 'Sign Up ?' %}</a>
+            <a href="{% url 'shop:product_list' %}">{% translate 'Home' %}</a>
+        </div>
+
+    </div>
 
 
+</div>
 
 
-
-{#<div class="holder">#}
-{#    <form action="" method="post">#}
-{#        {% csrf_token %}#}
-{#        <span style="">#}
-{#              <ul class="errorlist nonfield"><li></li></ul>#}
-{#            <label for="id_login"></label>#}
-{#              <input type="text" name="login" value="" placeholder="{% translate 'USER NAME' %}"#}
-{#                     autocomplete="username"#}
-{#                     maxlength="150" required="" id="id_login" class="info">#}
-{#            <label for="id_password"></label>#}
-{#              <input type="password" name="password" placeholder="{% translate ' PASSWORD ' %}" autocomplete="current-password" required=""#}
-{#                     id="id_password" class="info">#}
-{#            <label class="label_remember" for="id_remember">{% translate 'Remember Me' %}:</label>#}
-{#              <input type="checkbox" name="remember" id="id_remember">#}
-{#            </span>#}
-{#        <input type="submit" class="sub " value="{% translate ' LOG IN ' %}">#}
-{#    </form>#}
-{#</div>#}
-
-{#<a href="{% url 'password_reset' %}">password forgot</a>#}
-{#<a href="{% url 'signup' %}">sign up </a>#}
-#}
+</body>
+</html>

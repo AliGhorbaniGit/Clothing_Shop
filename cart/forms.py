@@ -2,12 +2,12 @@ from django import forms
 
 
 class AddToCartForm(forms.Form):
-    """    A FORM TO ADD NEW THING TO CART   """
+    """    A FORM TO ADD NEW PRODUCT TO CART   """
 
-    QUANTITY_CHOICES = [(i, str(i)) for i in range(1, 30)]
-    """     I can write this but not professional [(1, "1"), (2, "2")]      """
+    QUANTITY_CHOICES = [(i, str(i)) for i in range(1, 10)]
 
     quantity = forms.TypedChoiceField(choices=QUANTITY_CHOICES, coerce=int)
-    """   coerce define kind of data    """
+    color = forms.CharField()
+    size = forms.CharField()
 
     inplace = forms.BooleanField(required=False, widget=forms.HiddenInput)

@@ -1,33 +1,10 @@
-{#{% extends '_base.html' %}#}
-{#{% block content %}#}
-{#    {% if from.errors %}#}
-{#        {% for err in errors %}#}
-{#            <h1>err</h1>#}
-{#        {% endfor %}#}
-{#    {% endif %}#}
-{#    your order :#}
-{#    <form action="" method="POST">#}
-{#        {% csrf_token %}#}
-{#        {{ order_form.as_p }}#}
-{#{{ order_from.errors }}#}
-{#        <input name="first_name">#}
-{#        <input name="last_name">#}
-{#        <input name="phone_number">#}
-{#        <input name="address">#}
-{#        <input name="order_notes">#}
-{#        <button type="submit"> sub</button>#}
-{#    </form>#}
-{##}
-{#{% endblock %}#}
-{##}
+
 
 
 {% extends '_base.html' %}
 
 {% load i18n %}
-{#{% load crispy_forms_tags %}#}
-{#{% load persian_translation_tags %}#}
-{#{% load humanize %}#}
+
 
 {% block content %}
 
@@ -101,7 +78,7 @@
                                         <textarea class="form__input form__input--2 form__input--textarea" id="orderNotes" name="{{ form.order_notes.name }}" placeholder="اگر یادداشتی دارید در اینجا وارد کنید. در غیر این صورت این مکان را خالی بگذارید"></textarea>
                                     </div>
                                 </div>
-                                <button class="btn" type="submit">{% translate 'Submit' %}</button>
+                                <button class="btn btn-fullwidth btn-bg-red btn-color-white btn-hover-2" type="submit">{% translate 'Submit' %}</button>
                             </form>
 
                         </div>
@@ -123,11 +100,11 @@
                                         {% for item in cart %}
                                             <tr>
                                                 <th>{{ item.product_obj.title }}
-{#                                                     <strong><span>&#10005;</span> {{ item.quantity|translate_number }}</strong>#}
-                                                    <strong><span>&#10005;</span> {{ item.quantity }}</strong>
+                                                     <strong><span>&#10005;</span> {{ item.quantity }}</strong>
+
                                                 </th>
-{#                                                <td class="text-right">{{ item.product_obj.price|intcomma:False|translate_number }} {% translate '$' %}</td>#}
-                                            <td class="text-right">{{ item.product_obj.price}} {% translate '$' %}</td>
+                                                <td class="text-right">{{ item.product_obj.price}} {% translate '$' %}</td>
+
                                             </tr>
                                         {% endfor %}
 
@@ -135,8 +112,8 @@
                                     <tfoot>
                                         <tr class="cart-subtotal">
                                             <th>مجموع</th>
-{#                                            <td class="text-right">{{ cart.get_total_price|intcomma:False|translate_number }} {% translate '$' %}</td>#}
-                                            <td class="text-right">{{ cart.get_total_price }} {% translate '$' %}</td>
+                                            <td class="text-right">{{ cart.get_total_price}} {% translate '$' %}</td>
+
                                         </tr>
                                     </tfoot>
                                 </table>

@@ -1,8 +1,8 @@
-{% load static %}
-{% load i18n %}
 
 <!doctype html>
 <html lang="en">
+{% load static %}
+{% load i18n %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -22,7 +22,7 @@
 
 </header>
 
-
+<a href="{% url 'shop:product_list' %}"> {% translate 'Back To Home' %}  </a>
 <div class="content">
 
     <div class="content_holder">
@@ -59,7 +59,7 @@
 
         </div>
 
-        <a href="{% url 'ShowPackages' %}"> Back To Home </a>
+
 
     </div>
 

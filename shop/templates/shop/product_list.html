@@ -1,0 +1,158 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    {% load i18n %}
+    {% load static %}
+
+    <!-- Main Wrapper Start -->
+    <div class="wrapper">
+        <!-- Main Content Wrapper Start -->
+        <div class="main-content-wrapper container-fluid">
+            <div class="shop-page-wrapper shop-fullwidth">
+                <div class="container">
+                    <div class="row mb--50">
+                        <div class="col-12">
+                            <div class="shop-toolbar">
+                                <div class="container row align-items-center">
+                                    <div class="col-lg-12 mb-md--50 mb-xs--10">
+                                        <div class="shop-toolbar__left d-flex align-items-sm-center align-items-start flex-sm-row flex-column">
+                                            <p class="product-pages">
+
+
+                                                {% translate 'showing ' %}{{ products.number }}
+                                                {% translate '/' %} {{ products.paginator.page_range|length }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid shop-products">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="tab-content" id="product-tab-content">
+                                <div class="tab-pane fade show active" id="nav-all">
+                                    <div class="row xxl-block-grid-6 grid-space-20">
+                                        {% for product in products %}
+
+                                            <div class="col-xl-3 col-md-4 col-sm-6 mb--50">
+                                                <div class="ShoppingYar-product">
+                                                    <div class="product-inner">
+                                                        <figure class="product-image">
+                                                            <a href="{{ product.get_absolute_url }}">
+                                                                {% if product.image %}
+                                                                    <img src="{{ product.image.url }}"
+                                                                         alt="Product image">
+                                                                {% else %}
+                                                                    <img src="{% static 'img/default-cloth-image.jpg' %}"
+                                                                         alt="Product image">
+                                                                {% endif %}
+
+                                                            </a>
+
+                                                            <div class="ShoppingYar-product-action">
+                                                                <div class="product-action d-flex">
+                                                                    <a id="favorite " class=""
+                                                                       href="{% url 'cart:add_to_favorites' product.id %}">
+
+                                                                        {% if product.id in favorites %}
+                                                                            <img class="flaticon flaticon-like"
+                                                                                 src="{% static 'img/heart3.png' %}">
+
+                                                                        {% else %}
+                                                                            <img class="flaticon flaticon-like"
+                                                                                 src="{% static 'img/heart2.png' %}">
+                                                                        {% endif %}
+
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            {% if not product.available %}
+                                                                <span class="product-badge"> {% translate 'unavailable' %}</span>
+
+                                                            {% elif product.is_offer %}
+                                                                <span class="product-badge"> {% translate 'special offer' %}</span>
+                                                            {% endif %}
+
+
+                                                        </figure>
+                                                        <div class="product-info">
+                                                            <h3 class="product-title mb--15">
+                                                                <a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+                                                            </h3>
+                                                            <div class="product-price-wrapper mb--30">
+                                                                <span class="money">{{ product.price }} {% translate '$' %}</span>
+                                                            </div>
+
+                                                            <a href="{{ product.get_absolute_url }} "
+                                                               class="btn btn-small btn-bg-red btn-color-white btn-hover-2">{% trans 'detail' %}</a>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <nav class="pagination-wrap mt--35 mt-md--25 pb-5">
+                                <ul class="pagination">
+
+                                    {% if products.has_previous %}
+                                        <li>
+                                            <a href="?page={{ page_obj.previous_page_number }}"
+                                               class="prev page-number">previous</a>
+                                        </li>
+
+                                    {% endif %}
+                                    {{ products.current_page }}
+                                    {% if products.current_page %}
+
+
+                                    {% endif %}
+
+                                    {% for page in products.paginator.page_range %}
+
+                                        <li>
+                                            <a id="{{ page }}" onclick="page_indicator('{{ page }}')"
+                                               href="{% url 'shop:product_list' %}?page={{ page }}"
+                                               id="page-{{ page }}"
+                                               class="page-number"> {{ page }}</a>
+                                        </li>
+
+                                    {% endfor %}
+
+
+                                    {% if products.has_next %}
+                                        <li>
+                                            <a href="?page={{ page_obj.next_page_number }}" id="next_page"
+                                               class="next page-number">
+
+                                                next</a>
+                                        </li>
+                                    {% endif %}
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main Content Wrapper Start -->
+
+
+        {% include 'cart/cart_sidebar.html' %}
+
+        <!-- Global Overlay Start -->
+        <div class="ShoppingYar-global-overlay"></div>
+        <!-- Global Overlay End -->
+
+    </div>
+    <!-- Main Wrapper End -->
+
+
+{% endblock %}
+

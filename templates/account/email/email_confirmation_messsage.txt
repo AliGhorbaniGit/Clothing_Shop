@@ -6,7 +6,7 @@
 
 Hello from {{ site_name }}.
 
-If you requested this email please click on the link below:
+If you request this email, please click on the link below:
 {{ activate_url }}
 
 {% endblocktrans %}

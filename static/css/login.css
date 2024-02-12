@@ -1,49 +1,73 @@
-.login_form > .holder {
-    border: 1px solid grey;
-    width: 30%;
-    position: absolute;
-    top: 40%;
-    left: 38%;
-    height: 300px;
-    box-shadow: 1px -3px 10000px 5px #003366;
-    border-radius: 2px 2px 50px 50px;
-    background: indigo;
+.content:hover {
+    rotate: 0deg;
 }
 
-.login_form >.info {
-    width: 40%;
-    height: 80px;
-    margin: 40px 0px 20px 26px;
-    display: inline-block;
-    text-align: center;
-    border: 2px solid white;
-    box-shadow: 1px -3px 4px -1px #ddffdd;
-    border-radius: 35px 35px 2px 2px;
+.content {
+    width: 700px;
+    height: 700px;
+    box-shadow: 0px 0px 10px #4f1310;
+    margin: 100px auto;
+    rotate: 30deg;
+    transition: 1s;
+    padding-top: 50px;
 }
 
-.login_form >.label_remember {
-    margin-left: 150px;
-    text-align: center;
+.content:hover > .holder {
+    rotate: 0deg;
+    margin-top: 50px;
 }
 
-.login_form >.sub {
-    width: 25%;
-    height: 30px;
+.holder {
+    width: 400px;
+    height: 400px;
+    background: white;
+    margin: 100px auto;
+    rotate: -30deg;
+    transition: 1s;
+}
+
+form {
+    padding: 50px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 1px red;
+    width: 90%;
+    height: 400px;
+    background: rgba(0, 55, 110, 0.94);
+    margin: 15px auto;
     text-align: center;
+    color: white;
+
+}
+
+input {
+    border-radius: 5px;
+    border: 1px solid blue;
+    width: 90%;
+    height: 15%;
+    margin: 5px 0px 2px 14px;
+    text-align: center;
+
+
+}
+
+button {
+    border-bottom: 4px solid #4f1310;
+    width: 20%;
+    height: 10%;
+    background: yellowgreen;
+    margin: auto;
     display: block;
-    margin: 40px auto;
-    border: 2px solid white;
-    box-shadow: 0 -2px 3px 1px #003366;
-    border-radius: 2px 2px 25px 25px;
+    border-radius: 5px;
+
 }
 
-.login_form >li {
-    color: #ba2121;
-    box-shadow: 0 -2px 3px 1px #003366;
-    border-radius: 2px 2px 25px 25px;
-    list-style: none;
+a {
+    border-bottom: 2px solid #4f1310;
+    text-decoration: none;
     text-align: center;
-    margin-right: 27px;
+    background: yellowgreen;
+    margin: 0px 0px 5px 60px;
+    border-radius: 5px 5px 20px 20px;
     display: block;
-    height: 30px;
+
 }

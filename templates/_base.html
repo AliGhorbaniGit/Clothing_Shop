@@ -1,6 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 {% load static %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 <html lang="en">
 <head>
@@ -12,8 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Favicons -->
-    <link rel="shortcut icon" href="{% static 'img/iconA.png' %}" type="image/x-icon">
-    <link rel="apple-touch-icon" href="{% static 'img/iconA.png' %}">
+    <link rel="shortcut icon" href="{% static 'img/clothing-shop-logo.jpg' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'img/default-cloth-image.jpg' %}">
 
     <!-- ************************* CSS Files ************************* -->
 
@@ -25,23 +26,14 @@
     <!-- style css -->
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
-    {% block css %}
+    <!-- ************************* js Files ************************* -->
+    <script src='{% static 'js/_base.js' %}'> </script>
 
-    {% endblock %}
+
+
 </head>
 
 <body dir='rtl'>
-
-
-<div class="container">
-
-    {#    {% if user.is_authenticated %}#}
-    {#        <span class="alert alert-success">Hello {{ user.email }}</span> | <a href="{% url 'account_logout' %}">logout</a>#}
-    {#    {% else %}#}
-    {#        <a class="alert alert-success" href="{% url 'account_login' %}">login</a> | <a href="{% url 'account_signup' %}">sign up</a>#}
-    {#    {% endif %}#}
-
-</div>
 
 
 <!-- Header Start -->
@@ -54,75 +46,86 @@
                         <div class="site-branding" style="margin-right: 30px;">
 
                             <figure class="logo--normal d-none d-sm-block">
-                                <img class="px-5" src="{% static 'img/iconA.png' %}"
-                                     style="height: 40px;max-height: 50px; margin-bottom: -15px;" alt="Logo">
+                                <img class="px-10" src="{% static 'img/clothing-shop-logo.jpg' %}"
+                                     style="height: 100px;max-height: 150px; width: 200px; margin:1px -100px -15px 10px;"
+                                     alt="Logo">
                             </figure>
 
                         </div>
                         <div class="mainmenu-nav d-none d-lg-block w-100 pr-3">
                             <ul class="mainmenu d-lg-flex jusity-content-end jusity-content-lg-start pt-4">
                                 <li class="mainmenu__item menu-item-has-children active">
-                                    <a href="{% url 'ShowPackages' %}" class="mainmenu__link">
-                                        <span class="mm-text">خانه</span>
+                                    <a href="{% url 'shop:product_list' %}" class="mainmenu__link">
+                                        <span class="mm-text">{% translate 'Home' %}</span>
                                     </a>
                                 </li>
 
                                 <li class="mainmenu__item">
                                     {% if user.is_staff %}
-                                        <a href="{% url 'admin_to_user_new_contact' %}" class="mainmenu__link">
-                                            <span class="mm-text">تماس با شما</span>
+                                        <a href="{% url 'contactus:all_new_contact' %}"
+                                           class="mainmenu__link header-toolbar__btn  mini-cart-btn">
+
+                                            <span class="mm-text">{% translate ' notifications ' %}</span>
+                                            <sup class="mini-cart-count"
+                                                 style="width: 40%;">{{ contact|length }},{{ admin_awareness|length }}</sup>
                                         </a>
 
                                         <a href="/admin" class="mainmenu__link">
-                                            <span class="mm-text">panel admin</span>
+                                            <span class="mm-text">{% translate 'Admin Panel' %}</span>
+                                        </a>
+
+                                    {% else %}
+                                        <a href="{% url 'contactus:user_to_admin_contact' %}" class="mainmenu__link">
+                                            <span class="mm-text">{% translate 'contact us' %}</span>
                                         </a>
                                     {% endif %}
-                                    {% if not user.is_staff %}
-                                        <a href="{% url 'user_to_admin_contact' %}" class="mainmenu__link">
-                                            <span class="mm-text">تماس با ما</span>
-                                        </a>
-                                    {% endif %}
+
                                 </li>
                             </ul>
                         </div>
                     </nav>
                 </div>
-                <div class="col-xl-3 col-lg-4 col-sm-7 col-12 p-0">
-                    <ul class="header-toolbar">
+                <div class="col-xl-3 col-lg-4 col-sm-7 col-4 p-0">
+                    <ul style="width: 500px; padding-left:20px; " class="header-toolbar">
                         <li class="header-toolbar__item">
                             <a href="#searchForm" class="header-toolbar__btn toolbar-btn">
-                                <i class="flaticon flaticon-search"></i>{% trans 'search' %}
+
+                                <img src="{% static 'img/search.jpg' %}" style="width: 30px; height: 30px">
                             </a>
                         </li>
                         <li class="header-toolbar__item">
-                            <a href="{% url 'cart:favorites_list' %}" class="header-toolbar__btn mx-4">
-                                {% trans "wish list" %}
-                                {#                                <i class="flaticon flaticon-like"></i>#}
+                            <a href="{% url 'cart:favorites_list' %}"
+                               class="header-toolbar__btn mx-4 header-toolbar__btn mini-cart-btn">
+                                {% trans "favorites list" %}
+                                <sup class="mini-cart-count">{{ favorites|length }}</sup>
                             </a>
                         </li>
-                        {#                        <li class="header-toolbar__item mini-cart-item">#}
-                        <a href="#miniCart" class="header-toolbar__btn toolbar-btn mini-cart-btn">
+
+                        <a href="#miniCart" class="header-toolbar__btn toolbar-btn mini-cart-btn base_cart"
+                           style="margin-left: 20px">
                             {% translate "cart" %}
-                            {#                                <i class="flaticon flaticon-shopping-cart"> </i>#}
                             <sup class="mini-cart-count">{{ cart|length }}</sup>
                         </a>
-                        {#                        </li>#}
+
                         <li class="header-toolbar__item user-info">
                             {% if user.is_authenticated %}
-                                <a href="{% url 'profile' %}" class="header-toolbar__btn">{{ user.username }}
-                                    {#                                    <i class="flaticon flaticon-user"> </i>#}
-                                </a>
+                                <a href="{% url 'accounts:profile' %}"
+                                   class="header-toolbar__btn">{{ user.username }}</a>
                             {% else %}
                                 <i class=""> {% translate 'LOGIN ' %}</i>
                             {% endif %}
 
                             <ul class="user-info-menu">
                                 {% if user.is_authenticated %}
-                                    <li>
-                                        <a class="text-right" href="{% url 'account_logout' %}">{% trans 'Logout' %}</a>
+                                    <li style="transition: 1s;">
+                                        <a class="text-right"
+                                           href="{% url 'account_logout' %}">{% translate 'Logout' %}</a>
                                     </li>
                                     <li>
-                                        <a class="text-right" href="{% url 'profile' %}">{% translate 'Profile' %}</a>
+                                        <a class="text-right"
+                                           href="{% url 'accounts:profile' %}">{% translate 'Profile' %}</a>
+
+
                                     </li>
                                 {% else %}
                                     <li>
@@ -162,7 +165,25 @@
 
 {% endif %}
 
+<!-- Search form Popup Start -->
+<div class="searchform__popup" id="searchForm">
+    <a href="{% url 'shop:search_product_view' %}" class="btn-close">
+        <img src="{% static 'img/icons8-cross.gif' %}" alt="cancel">
+    </a>
+
+    <div class="searchform__body">
+        <p>{% translate ' type your letters , then push enter' %} </p>
+        <form method="POST" action="{% url 'shop:search_product_view' %}">
+            {% csrf_token %}
+            <input type="text" name="text" id="popup-search" class="searchform__input"
+                   placeholder={% translate ' search product' %}>
+            <button type="submit" class="searchform__submit"></button>
+        </form>
+    </div>
+</div>
+<!-- Search form Popup End -->
 {% block content %}
+
 
 {% endblock %}
 
@@ -176,6 +197,8 @@
 <!-- Main JS -->
 <script src="{% static 'js/main.js' %}"></script>
 
+<!-- _base JS -->
+<script src="{% static 'js/_base.js' %}"></script>
 <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -185,13 +208,10 @@
 
 <!-- Option 2: Separate Popper and Bootstrap JS -->
 <!--
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
--->
-<script>
 
-
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
 
 </body>
 </html>

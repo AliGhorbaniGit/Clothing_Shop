@@ -1,0 +1,182 @@
+<!doctype html>
+{% load static %}
+{% load i18n %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{% static 'img/clothing-shop-logo.jpg' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'img/default-cloth-image.jpg' %}">
+
+
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}" type="text/css">
+
+    <title>{% trans 'About Me' %}</title>
+
+</head>
+<body>
+
+<header id="header">
+    {% if messages %}
+        <div class="container">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+
+    {% endif %}
+
+    <div class="right_holder">
+        <div>
+            <h2><a href="{% url 'cart:cart_detail' %}">{% trans 'cart' %}</a></h2>
+            {% if not cart.is_empty %}
+                {% for item in cart %}
+                    <p><a href="{% url 'shop:product_detail' item.product_obj.id %}"> {{ item.product_obj.title }}</a>
+                    </p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div>
+            <h2>{% trans 'Favorites' %}  </h2>
+            {% for fav in favorites %}
+                <p><a href="{% url 'shop:product_detail' fav.id %}"> {{ fav.title }}</a></p>
+            {% endfor %}
+        </div>
+
+        <div>
+            <h2> {% trans 'Orders' %}
+                {% if orders.lenght > 0 %}
+
+
+                    {% for ord in orders %}
+
+                        {% for ordd in ord %}
+                            {{ ordd.order.first_name }}
+                        {% endfor %}
+
+                        {% for comment in ore.items %}
+                            {{ comment.product }}
+                        {% endfor %}</h2>
+
+                        <p class="order">
+                            <a href="{% url 'order_products' ord.id %}">
+                                {{ ord.data_created }} |
+                                {% if  ord.is_paid %}
+                                    paid
+                                {% else %}
+                                    not paid
+                                {% endif %} |
+
+                                {{ ord.order_notes }}
+                            </a>
+                        </p>
+                    {% endfor %}
+                {% endif %}
+            {% for foo in ordser_and_items %}
+                {% for f in foo %}
+                    {{ f.product }}
+                {% endfor %}
+            {% endfor %}
+
+            {% for item in ordser_and_items %}
+                {{ item.order.product }} add
+            {% endfor %}
+
+        </div>
+
+
+    </div>
+
+
+    <div class="left_holder">
+        <div>
+            {% if user.image %}
+                <img class="user_image" src="{{ user.image.url }}" alt="image">
+            {% else %}
+                <img src="{% static 'img/userlogo.png' %}" alt="image" class="user_image">
+            {% endif %}
+        </div>
+
+        <div>
+            <h2>{% translate ' Welcome to your panel deer ' %} {{ user.username }} </h2>
+            <p>  {% translate ' You joined us at ' %}: {{ user.date_joined }}</p>
+            <p>  {% translate ' First name ' %}: {{ user.first_name }}</p>
+            <p> {% translate ' Last Name ' %}: {{ user.last_name }}</p>
+
+            <p>   {% translate 'Email' %}: {{ user.email }}</p>
+            <p>   {% translate 'Number' %}: {{ user.number }}</p>
+            {% if user.is_staff %}
+                <p> STATUS : STAFF</p>
+                <p><a href="../../admin">{% translate 'Panel Admin' %}  </a></p>
+                <p>
+                    <a href="{% url 'contactus:all_new_contact' %}" class="mainmenu__link">
+                        <span class="mm-text"> {% translate 'Notifications' %} </span>
+                    </a>
+                </p>
+                <p><a href="../../rosetta/"> {% trans 'Translation' %} </a></p>
+            {% else %}
+                <p> STATUS : USER </p>
+            {% endif %}
+
+            <p>
+                <a href="{% url 'accounts:edit_user_information' user.id %}"> {% translate "Edit Informations" %} </a>
+            </p>
+
+            <p>
+                <a href=" {% url 'account_change_password' %}"> {% translate "Change Password" %} </a>
+            </p>
+
+            <p>
+                <a href=" {% url 'account_reset_password' %}"> {% translate "forgot Password" %} </a>
+            </p>
+
+            <p>
+                <a href="{% url 'account_logout' %}"> {% translate "logout" %}</a>
+            </p>
+        </div>
+
+        <div>
+            <h2> {% trans 'Your Comments' %}</h2>
+            {% for comm in comment %}
+                {% if comm.product.image %}
+                    <img src="{{ comm.product.image.url }}">
+                {% else %}
+                    <img src="{% static 'img/default-cloth-image.jpg' %}"
+                         alt="Product image">
+                {% endif %}
+                <p><a href="{% url 'shop:product_detail' comm.product.id %}">{{ comm.text }}</a></p>
+            {% endfor %}
+
+
+        </div>
+
+        <div>
+            <h2> {% trans 'Your replies Comments' %}</h2>
+            {% for comm in reply_comments %}
+
+                {% if comm.reply_product.image %}
+                    <img src="{{ comm.reply_product.image.url }}">
+                {% else %}
+                    <img src="{% static 'img/default-cloth-image.jpg' %}"
+                         alt="Product image">
+                {% endif %}
+                <p> comment :{{ comm.reply_comment.text }} </p>
+
+                <p><a href="{% url 'shop:product_detail' comm.reply_product.id %}"> {% trans 'you replied ' %}: {{ comm.text }}</a></p>
+            {% endfor %}
+
+
+        </div>
+
+    </div>
+
+
+    <a href="{% url 'shop:product_list' %}" class="back_to_home"> {% trans 'Back To Home' %} </a>
+</header>
+
+
+</body>
+</html>

@@ -1,7 +1,8 @@
 from django.utils.translation import gettext as _
 from django.contrib import messages
+from copy import deepcopy
 
-from pages.models import Package
+from shop.models import Product
 
 
 class Cart:
@@ -9,7 +10,6 @@ class Cart:
         """    Initialize the cart  """
 
         self.request = request
-
         self.session = request.session
 
         cart = self.session.get('cart')
@@ -19,106 +19,136 @@ class Cart:
 
         self.cart = cart
 
-    def add(self, product, quantity=1, replace_current_quantity=False):
-        """    Add the specified product to the cart if it exists     """
+    def add(self, product, size, color, quantity=1, replace_current_quantity=False):
+        """   Add product to the cart   """
 
         product_id = str(product.id)
 
         if product_id not in self.cart:
-            self.cart[product_id] = {'quantity': quantity}
-            print('in add 1')
+            self.cart[product_id] = {'quantity': quantity, 'color': color, 'size': size}
+
         elif replace_current_quantity:
-            print('in add 2')
-            self.cart[product_id]['quantity'] = quantity
-        else:
-            print('in add 3')
             self.cart[product_id]['quantity'] += quantity
+            self.cart[product_id]['color'] = color
+            self.cart[product_id]['size'] = size
+
+        else:
+            self.cart[product_id]['quantity'] = quantity
+            self.cart[product_id]['color'] = color
+            self.cart[product_id]['size'] = size
 
         messages.success(self.request, _('Product successfully added to your cart'))
-
         self.save()
 
     def remove(self, product):
-        """    Remove a product from the cart    """
+
+        """   Remove a product from the cart   """
 
         product_id = str(product.id)
 
         if product_id in self.cart:
             del self.cart[product_id]
-            messages.success(self.request, _('Product successfully removed from cart'))
+            messages.success(self.request, _('Product successfully removed from your cart'))
             self.save()
+
+        else:
+            messages.success(self.request, _('there is not such this Product to be remove from your cart'))
 
     def save(self):
         """   Mark session as modified to save changes   """
-
         self.session.modified = True
 
     def __iter__(self):
-        """ make the cart iterable   """
+        """   Marking cart iterable   """
 
-        """ i can get :  cart = self.cart.copy()  
-        I don't want to change the cart 
-        so I copy it because when I copy
-        a things, the main don't change,
-        here self.cart will never change, and cart will change    """
-        cart = self.cart
-        print('im in iter')
-        for id_product in cart.keys():
-            print('im in iter and for')
+        # cart = deepcopy(self.cart)
+        # product_ids = self.cart.keys()
+        #
+        # for id in product_ids:
+        #     # is 'get' ok here ??
+        #     product = Product.objects.get(id=id)
+        #     if product:
+        #         pass
+        #     else:
+        #         del cart[str(id)]
+        #         self.save()
+        #
+        # products = Product.objects.filter(id__in=product_ids)
+        #
+        # for product in products:
+        #     cart[str(product.id)]['product_obj'] = product
+        #
+        # for item in cart.values():
+        #     if item['product_obj'].is_offer:
+        #         off = (item['product_obj'].price - (
+        #                 (item['product_obj'].price * item['product_obj'].offer_percent) / 100))
+        #         qua = item['quantity']
+        #         item['total_price'] = int(off) * qua
+        #     else:
+        #         item['total_price'] = item['product_obj'].price * item['quantity']
+        #
+        #     yield item
 
-            product = Package.objects.filter(id=id_product)
+        cart = deepcopy(self.cart)
+        product_ids = list(self.cart.keys())
 
-            if product:
-                pass
-                print('there is this product')
-            else:
-                # cart.pop(__key=product)
-                del cart[str(id_product)]
-                print('there i not this product')
+        for id in product_ids:
+            try:
+                product = Product.objects.get(id=id)
+                cart[str(id)]['product_obj'] = product
+            except Product.DoesNotExist:
+                del cart[str(id)]
                 self.save()
-                break
 
-            # if len(cart.keys())==0:
-            #     messages.warning(self.request, f"im in len/for/if{len(cart.keys())}")
-            #
-            #     self.clear()
-            #     self.save()
-            #     return False
+        for item in cart.values():
+            if 'product_obj' in item:
+                if item['product_obj'].is_offer:
+                    off = (item['product_obj'].price - (
+                            (item['product_obj'].price * item['product_obj'].offer_percent) / 100))
+                    qua = item['quantity']
+                    item['total_price'] = int(off) * qua
+                else:
+                    item['total_price'] = item['product_obj'].price * item['quantity']
+                yield item
 
-        product_ids = cart.keys()
-        products = Package.objects.filter(id__in=product_ids)
+    def __len__(self):
+        cart = deepcopy(self.cart)
+        product_ids = self.cart.keys()
+        products = Product.objects.filter(id__in=product_ids)
+
+        if len(products) == 0:
+            return 0
+        return sum(item['quantity'] for item in self.cart.values())
+
+    def get_total_price(self):
+
+        cart = deepcopy(self.cart)
+        product_ids = self.cart.keys()
+        products = Product.objects.filter(id__in=product_ids)
+        for product in products:
+            cart[str(product.id)]['product_obj'] = product
+        if len(products) == 0:
+            return 0
 
         for product in products:
             cart[str(product.id)]['product_obj'] = product
 
+        product_total_price = 0
         for item in cart.values():
-            item['total_price'] = item['product_obj'].price * item['quantity']
-            yield item
+            if item['product_obj'].is_offer:
+                product_total_price += (item['product_obj'].price - (
+                        (item['product_obj'].price * item['product_obj'].offer_percent) / 100)) * item['quantity']
 
-    def __len__(self):
-        print('im in len')
-        cart = self.cart
-        if cart:
-            print('###################### in len there is cart')
-            return sum(item['quantity'] for item in self.cart.values())
-        else:
-            print('#######################in len there is no cart')
-            return False
+            else:
+                product_total_price += (item['product_obj'].price * item['quantity'])
 
-    #             return sum(item['quantity'] * item['product_obj'].price for item in self.cart.values())
-    #         # return len(self.cart.keys()) its show only product length without quantity
-    #         return sum(item['quantity'] for item in self.update().values())
-    #
+        return int(product_total_price)
+
     def clear(self):
         del self.session['cart']
         self.save()
 
-    def get_total_price(self):
-        product_ids = self.cart.keys()
-
-        return sum(item['quantity'] * item['product_obj'].price for item in self.cart.values())
-
     def is_empty(self):
         if self.cart:
-            return True
-        return False
+            return False
+        return True

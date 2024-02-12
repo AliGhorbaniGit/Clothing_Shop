@@ -1,58 +1,84 @@
-from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.urls import reverse
 from django.utils.translation import gettext as _
 
+from cart.cart import Cart
 from .forms import OrderForm
 from .models import OrderItem
-
-from cart.cart import Cart
 
 
 @login_required
 def order_create_view(request):
-    print( "11111111111111111")
     order_form = OrderForm()
     cart = Cart(request)
-    print('*********************im in create order')
+
     if len(cart) == 0:
-        print('*****************im in create order and len cart is 0')
-        messages.warning(request, _('u must add some product first'))
-        return redirect('ShowPackages')
+        messages.warning(request, _('You can not proceed to checkout page because your cart is empty.'))
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
     if request.method == 'POST':
-        print('+++++++++++++++++++in ')
-        order_form = OrderForm(request.POST)
-        print('*******************in request.method == post')
+        order_form = OrderForm(request.POST, )
+
         if order_form.is_valid():
-            print("222222222222")
             order_obj = order_form.save(commit=False)
             order_obj.user = request.user
             order_obj.save()
-            print('*******************in request.method == post and  form is valid')
 
             for item in cart:
                 product = item['product_obj']
-                OrderItem.objects.create(
-                    order=order_obj,
-                    product=product,
-                    quantity=item['quantity'],
-                    price=product.price,
-                )
-            # cart.clear()
+                if product.available:
+                    # CHECK THAT IS THERE PRODUCT QUANTITY MORE THAT USER ORDER OR NOT
+                    how_many = 1
+                    targets = product.size_color_count.all()
+                    for target in targets:
+                        if target.color_1 == item['color']:
+                            how_many = target.how_many_color_1
+
+                        elif target.color_2 == item['color']:
+                            how_many = target.how_many_color_2
+
+                        elif target.color_3 == item['color']:
+                            how_many = target.how_many_color_3
+
+                        elif target.color_4 == item['color']:
+                            how_many = target.how_many_color_4
+
+                        else:
+                            messages.error(request, f"You Choose color : {item['color']} "
+                                                    f"for product : {product.title} "
+                                                    f"that not exists , please Choose another color")
+                            return reverse('shop:product_detail', args=[product.id])
+
+                        if item['quantity'] > how_many:
+                            messages.error(request, f"You Choose color : {item['color']} "
+                                                    f"for product : {product.title} "
+                                                    f"with : {how_many} count "
+                                                    f"that already dose unavailable , please Choose {how_many} count or less ")
+                            return reverse('shop:product_detail', args=[product.id])
+
+                    OrderItem.objects.create(
+                        order=order_obj,
+                        product=product,
+                        quantity=item['quantity'],
+                        size=item['size'],
+                        color=item['color'],
+                        price=product.price,
+                    )
+
+                # else:
+                #     del cart[str(product.id)]
+                #     cart.save()
 
             request.user.first_name = order_obj.first_name
             request.user.last_name = order_obj.last_name
             request.user.save()
-            messages.success(request, _('your order has successfully add'))
 
             request.session['order_id'] = order_obj.id
-            print('payment is ok')
-            return redirect('payment_process')
+            return redirect('payments:payment_process')
 
-        else:
-            print('form not valid')
-            messages.error(request, _('some error in information'))
-            return render(request, 'orders/order_create.html',
-                          {'order_form': order_form, })
-    return render(request, 'orders/order_create.html',
-                  {'order_form': order_form, })
+    return render(request, 'orders/order_create.html', {
+        'form': order_form,
+    })

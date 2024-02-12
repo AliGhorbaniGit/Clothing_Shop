@@ -5,14 +5,18 @@ from .models import Order, OrderItem
 
 class ItemInline(admin.TabularInline):
     model = OrderItem
-    fields = ['product', ]
+    fields = ['order', 'product', 'quantity', 'color', 'size', 'price', ]
+    extra = 1
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['user', 'is_paid', 'data_created']
+    model = Order
+    list_display = ['user', 'is_paid', 'date_time_created']
     inlines = [ItemInline, ]
 
+
 class OrderItemAdmin(admin.ModelAdmin):
+    model = OrderItem
     list_display = ['order', 'product', 'quantity', 'price']
 
 

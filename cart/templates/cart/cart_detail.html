@@ -1,76 +1,8 @@
-{#{% extends '_base.html' %}#}
-{##}
-{#{% block content %}#}
-{#    {% if cart %}#}
-{#    {{ cart|length }}#}
-{#        {% for foo in cart %}#}
-{#            <div style="border:1px solid red;">#}
-{#                <br>#}
-{#                {{ foo.product_obj.title }}<br>#}
-{#                {{ foo.total_price }}<br>#}
-{#                {{ foo.quantity }}<br>#}
-{##}
-{#                <form action="{% url 'add_to_cart' foo.product_obj.id %}" method="POST">#}
-{#                    {% csrf_token %}#}
-{#                    {{ foo.product_update_quantity_form.inplace }}#}
-{#                    <p onclick="add(m={{ foo.product_obj.id }})"> add</p>#}
-{#                    <input name="quantity" id="{{ foo.product_obj.id }}" value="1" min="1" max="30">#}
-{#                    <p onclick="kam(m={{ foo.product_obj.id }})"> kam</p>#}
-{#                    <button type="submit"> sub</button>#}
-{##}
-{#                </form>#}
-{##}
-{##}
-{##}
-{#                <a href="{% url 'remove_from_cart' foo.product_obj.id %}">remove</a>#}
-{#                <br>#}
-{#                <br>#}
-{#</div>#}
-{#        {% endfor %}#}
-{##}
-{#        total : {{ cart.total_price }}#}
-{#        {% if cart|length %}#}
-{#            <a href="{% url 'order_create' %}"> pay </a>#}
-{#            <br>#}
-{#            <a href="{% url 'clear_cart' %}"> clear</a>#}
-{##}
-{#        {% endif %}#}
-{##}
-{#        <script>#}
-{##}
-{#            i = 1;#}
-{##}
-{#            function add(m) {#}
-{#                i += 1;#}
-{##}
-{##}
-{#                document.getElementById(m).value = i;#}
-{##}
-{#            }#}
-{##}
-{#            function kam(m) {#}
-{#                i -= 1;#}
-{#                document.getElementById(m).value = i;#}
-{#            }#}
-{##}
-{##}
-{#        </script>#}
-{##}
-{#    {% endif %}#}
-{##}
-{#    there is no cart#}
-{#{% endblock content %}#}
-{##}
-
-
 {% extends '_base.html' %}
 
 {% load static %}
 {% load i18n %}
-{#{% load crispy_forms_tags %}#}
-{#{% load comment_tags %}#}
-{#{% load persian_translation_tags %}#}
-{#{% load humanize %}#}
+
 
 {% block content %}
 
@@ -90,25 +22,40 @@
                                         <table class="table text-center">
                                             <thead>
                                             <tr>
-                                                <th>&nbsp;</th>
-                                                <th>عکس محصول</th>
-                                                <th>نام محصول</th>
-                                                <th>قیمت</th>
-                                                <th>مقدار</th>
-                                                <th>مجموع</th>
+                                                <th></th>
+                                                <th class=" btn-danger">{% translate 'picture' %}</th>
+                                                <th class="alert-danger">{% translate 'product name' %} </th>
+                                                <th class="btn-danger"> {% translate 'size' %} </th>
+                                                <th class="alert-danger"> {% translate 'color' %} </th>
+                                                <th class="btn-danger">{% translate 'price' %}</th>
+                                                <th class="alert-danger">{% translate 'quantity' %}</th>
+                                                <th class="btn-danger">{% translate 'total' %}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
+
                                             {% for item in cart %}
                                                 <tr>
                                                     <td class="product-remove text-left">
                                                         <a href="{% url 'cart:remove_from_cart' item.product_obj.id %}">
-                                                            <i class="flaticon flaticon-cross"></i>
+                                                            <img class="flaticon flaticon-cross"
+                                                                 src="{% static 'img/icons8-cross.gif' %}" alt="cancel">
                                                         </a>
                                                     </td>
+
+
                                                     <td class="product-thumbnail text-left">
-                                                        <img src="{{ item.product_obj.image.url }}">
+                                                        <a href="{{ item.product_obj.get_absolute_url }}">
+                                                            {% if item.product_obj.image %}
+                                                                <img src="{{ item.product_obj.image.url }}">
+
+                                                            {% else %}
+                                                                <img src="{% static 'img/default-cloth-image.jpg' %}"
+                                                                     alt="Product image">
+                                                            {% endif %}
+                                                        </a>
                                                     </td>
+
                                                     <td class="product-name">
                                                         <h3>
                                                             <a href="{{ item.product_obj.get_absolute_url }}">
@@ -116,37 +63,103 @@
                                                             </a>
                                                         </h3>
                                                     </td>
+
+                                                    <td class="product-name">
+                                                        <h3>
+                                                            {{ item.size }}
+                                                            {#                                                            <ul class="size_in_cart" id="{{ item.size }}"> {{ item.size }}#}
+                                                            {#                                                                {% for product in item.product_obj.size_color_count.all %}#}
+                                                            {#                                                                    <li value="{{ product.size }}"#}
+                                                            {#                                                                        onclick="InCartSizeChoices('{{ product.size }}')">#}
+                                                            {##}
+                                                            {#                                                                    </li>#}
+                                                            {#                                                                {% endfor %}#}
+                                                            {#                                                            </ul>#}
+
+                                                        </h3>
+                                                    </td>
+
+                                                    <td class="product-name">
+                                                        <h3>
+
+
+                                                            {{ item.color }}
+                                                            {#                                                            {% for product in item.product_obj.size_color_count.all %}#}
+
+                                                            {#                                                                <ul class="{{ product.size }} color_select_in_cart"> color#}
+                                                            {##}
+                                                            {##}
+                                                            {#                                                                    {% if product.color_1 %}#}
+                                                            {#                                                                        <li value="{{ product.color_1 }}"#}
+                                                            {#                                                                            onclick="InCartColorChoices('{{ product.size }}','{{ product.color_1 }}','{{ product.how_many_color_1 }}')">#}
+                                                            {#                                                                            {{ product.color_1 }}#}
+                                                            {#                                                                        </li>#}
+                                                            {#                                                                    {% endif %}#}
+                                                            {#                                                                    {% if product.color_2 %}#}
+                                                            {#                                                                        <li value="{{ product.color_2 }}"#}
+                                                            {#                                                                            onclick="colorChoices('{{ product.size }}','{{ product.color_2 }}','{{ product.how_many_color_2 }}')">#}
+                                                            {#                                                                            {{ product.color_2 }}#}
+                                                            {#                                                                        </li>#}
+                                                            {##}
+                                                            {#                                                                    {% endif %}#}
+                                                            {#                                                                    {% if product.color_3 %}#}
+                                                            {#                                                                        <li value="{{ product.color_3 }}"#}
+                                                            {#                                                                            onclick="colorChoices('{{ product.size }}','{{ product.color_3 }}','{{ product.how_many_color_3 }}')">#}
+                                                            {#                                                                            {{ product.color_3 }}#}
+                                                            {#                                                                        </li>#}
+                                                            {#                                                                    {% endif %}#}
+                                                            {#                                                                    {% if product.color_4 %}#}
+                                                            {#                                                                        <li value="{{ product.color_4 }}"#}
+                                                            {#                                                                            onclick="colorChoices('{{ product.size }}','{{ product.color_4 }}','{{ product.how_many_color_4 }}')">#}
+                                                            {#                                                                            {{ product.color_4 }}#}
+                                                            {#                                                                        </li>#}
+                                                            {#                                                                    {% endif %}#}
+                                                            {##}
+                                                            {##}
+                                                            {#                                                                </ul>#}
+                                                            {##}
+                                                            {#                                                            {% endfor %}#}
+
+                                                        </h3>
+                                                    </td>
+
                                                     <td class="product-price">
                                                                 <span class="product-price-wrapper">
-                                                                   <span class="money">{{ item.product_obj.price }} {% trans '$' %}</span>
+                                                                    {% if item.product_obj.is_offer %}
+                                                                        {{ item.product_obj.price_by_offer }}
 
-{#                                                                    <span class="money">{{ item.product_obj.price|intcomma:False|translate_number }} {% trans '$' %}</span>#}
+                                                                    {% else %}
+                                                                        {{ item.product_obj.price }}
+                                                                    {% endif %}
+
                                                                 </span>
                                                     </td>
                                                     <td class="product-quantity">
-                                                        <form class="d-flex" method="POST"
-                                                              action="{% url 'cart:add_to_cart' item.product_obj.id %}">
-                                                            {% csrf_token %}
-                                                            <div class="quantity">
-                                                                <input
-                                                                        type="number"
-                                                                        class="quantity-input"
-                                                                        name="quantity"
-                                                                        id="qty-1"
-                                                                        value="{{ item.quantity }}"
-                                                                        min="1"
-                                                                >
-                                                            </div>
-                                                            {{ item.product_update_quantity_form.inplace }}
-                                                            <button class="small" type="submit"><i
-                                                                    class="fa fa-refresh"></i></button>
-                                                        </form>
+                                                        {{ item.quantity }}
+
+                                                        {#                                                        <form class="d-flex" method="POST"#}
+                                                        {#                                                              action="{% url 'cart:add_to_cart' item.product_obj.id %}">#}
+                                                        {#                                                            {% csrf_token %}#}
+                                                        {#                                                            <div class="quantity">#}
+                                                        {#                                                                <input#}
+                                                        {#                                                                        type="number"#}
+                                                        {#                                                                        class="quantity-input"#}
+                                                        {#                                                                        name="quantity"#}
+                                                        {#                                                                        id="qty-1"#}
+                                                        {#                                                                        value="{{ item.quantity }}"#}
+                                                        {#                                                                        min="1"#}
+                                                        {#                                                                >#}
+                                                        {#                                                            </div>#}
+                                                        {#                                                            {{ item.product_update_quantity_form.inplace }}#}
+                                                        {#                                                            <button class="small" type="submit"><i#}
+                                                        {#                                                                    class="fa fa-refresh"></i></button>#}
+                                                        {#                                                        </form>#}
+
                                                     </td>
                                                     <td class="product-total-price">
                                                                 <span class="product-price-wrapper">
-{#                                                                  <span class="money">{{ item.total_price|intcomma:False|translate_number }} {% trans '$' %}</span>#}
 
-                                                                    <span class="money">{{ item.total_price }} {% trans '$' %}</span>
+                                                                    {{ item.total_price }}
                                                                 </span>
                                                     </td>
                                                 </tr>
@@ -155,17 +168,18 @@
                                         </table>
                                     </div>
                                 {% else %}
-                                    <p>{% trans 'Cart is Empty! Please add some products to the cart' %}</p>
-                                    <a href="{% url 'ShowPackages' %}">{% trans 'Go shopping' %}</a>
+                                    <p>{% trans 'Cart is Empty!' %}</p>
+                                    <a href="{% url 'shop:product_list' %}">{% trans 'Go shopping' %}</a>
                                 {% endif %}
                             </div>
                         </div>
-                        {% if not cart.is_empty %}
+                        {% if  cart.is_empty %}
                             <div class="row no-gutters border-top pt--20 mt--20">
                                 <div class="col-sm-6 text-sm-right">
-                                    <form action="{% url 'cart:clear_cart' %}" method="POST">
+                                    <form method="POST">
                                         {% csrf_token %}
-                                        <button type="submit" class="cart-form__btn">
+                                        <button type="submit"
+                                                class="btn btn-fullwidth btn-bg-red btn-color-white btn-hover-2 max-w-5">
                                             {% translate 'Empty Cart' %}
                                         </button>
                                     </form>
@@ -178,30 +192,25 @@
                             <div class="cart-totals">
                                 <h5 class="font-size-14 font-bold mb--15">مجموع</h5>
                                 <div class="cart-calculator">
-                                    {#                                        <div class="cart-calculator__item">#}
-                                    {#                                            <div class="cart-calculator__item--head">#}
-                                    {#                                                <span>مجموع</span>#}
-                                    {#                                            </div>#}
-                                    {#                                            <div class="cart-calculator__item--value">#}
-                                    {#                                                <span>۳۴۶,۰۰۰ تومان</span>#}
-                                    {#                                            </div>#}
-                                    {#                                        </div>#}
-                                    <div class="cart-calculator__item order-total">
+                                    <div class="cart-calculator__item">
                                         <div class="cart-calculator__item--head">
-                                            <span>جمع کل</span>
+                                            <span>{% translate 'total price ' %}</span>
                                         </div>
                                         <div class="cart-calculator__item--value">
-                                                <span class="product-price-wrapper">
-{#                                                  <span class="money">{{ cart.get_total_price|intcomma:False|translate_number }} {% translate '$' %}</span>#}
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                    <div class="cart-calculator__item order-total">
 
-                                                    <span class="money">{{ cart.get_total_price }} {% translate '$' %}</span>
+                                        <div class="cart-calculator__item--value">
+                                                <span class="product-price-wrapper">{{ cart.get_total_price }}
                                                 </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {% url 'ShowPackages' %}
-                            <a href="{% url 'order_create' %}"
+
+                            <a href="{% url 'orders:order_create' %}"
                                class="btn btn-fullwidth btn-bg-red btn-color-white btn-hover-2">
                                 {% translate 'Checkout' %}
                             </a>
@@ -212,4 +221,25 @@
         </div>
     </div>
     <!-- Main Content Wrapper Start -->
+
+
+    {#    <script>#}
+    {##}
+    {#        function InCartColorChoices(size, color, count) {#}
+    {#            alert('aaa');#}
+    {#            document.getElementsByClassName(size).innerHTML = color;#}
+    {#            document.getElementById('qty').max = count;#}
+    {#            document.getElementById('product_color').value = color;#}
+    {#        }#}
+    {##}
+    {#        function InCartSizeChoices(i) {#}
+    {#            alert('hhh');#}
+    {#            document.getElementById(i).innerHTML = i;#}
+    {#            document.getElementsByClassName(i).style.display = 'block';#}
+    {#            document.getElementsByClassName(i).style.visibility = 'visible';#}
+    {#            document.getElementById('product_size').value = i;#}
+    {#        }#}
+    {##}
+    {#    </script>#}
+
 {% endblock %}

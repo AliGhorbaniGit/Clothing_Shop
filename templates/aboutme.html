@@ -1,76 +1,64 @@
 <!doctype html>
+<html lang="en">
 {% load static %}
 {% load i18n %}
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-     <link rel="shortcut icon" href="{% static 'img/iconA.png' %}" type="image/x-icon">
+
+
+    <!-- style css -->
+    <link rel="stylesheet" href="{% static 'css/aboutme.css' %}">
+
+    <link rel="shortcut icon" href="{% static 'img/iconA.png' %}" type="image/x-icon">
     <link rel="apple-touch-icon" href="{% static 'img/iconA.png' %}">
-    <link rel="stylesheet" href="{% static 'css/aboutme.css' %}" type="text/css">
 
     <title>{% trans 'About Me' %}</title>
 
 </head>
 <body>
+<div class="container">
+    <h1>About Me</h1>
+    <p>Hello, my name is ALi Ghorbani. I am a web developer with 1 year of experience in the industry.
+        I have a passion for projects that let me do some new experiences,
+        I am improving my skills in Python-Django.</p>
+    <p>
+        I am also committed to continuous learning and professional development to stay updated with the latest trends
+        and technologies in my field.</p>
+    <p>Feel free to contact me at " alighorbanimail@gmail.com " for any inquiries or collaboration opportunities.
+        I am always open to new challenges and exciting projects!</p>
 
-<header id="header">
+    <h4> more contact way : </h4>
 
-    <div class="right_holder">
-        <div>
-            <h2> Skills</h2>
-            <p> Python <br> Django <br> Some Web Design </p>
-        </div>
+    <div class="telegram contact">
+        <img src="{% static 'img/telegram_logo.png' %}">
+        <p class="contact-p"> @AliGhorbani_Ali</p>
+    </div>
 
-        <div>
-            <h2> Education </h2>
-            <p> soft ware gratitiud</p>
-        </div>
+    <div class="phone contact">
+        <img src="{% static 'img/phone.png' %}">
+        <p class="contact-p">+98 09215994828 </p>
+    </div>
 
-        <div>
-            <h2> experiences</h2>
-            <p> 2 years</p>
-        </div>
+    <div class="github contact">
+        <img src="{% static 'img/github.png' %}">
+        <p class="contact-p">hubgitali </p>
 
     </div>
 
-    <div class="left_holder">
-        <div>
-            <img src="{% static 'img/Ali.jpg' %}" alt="image">
-        </div>
 
-        <div>
-            <h2> Ali Ghorbani </h2>
-            <p> Hi , Im Ali , i like web developemt , i can handel backend lonleny  Im 27 years old </p>
-        </div>
-
-        <div>
-            <h2> {% trans 'Contact : ' %}</h2>
-
-            <div class="telegram">
-                <img src="{% static 'img/telegram_logo.png' %}">
-                <p>@AliGhorbani_Ali</p>
-            </div>
-
-            <div class="github">
-                <img src="{% static 'img/github.png' %}">
-                <p>hubgitali </p>
-            </div>
-
-            <div class="phone">
-                <img src="{% static 'img/phone.png' %}">
-                <p>+98 09215994828 </p>
-            </div>
-        </div>
-
-    </div>
-
-    </div>
- <a href="{% url 'ShowPackages' %}"> {% trans 'Back TO Home' %} </a>
-</header>
+    <a href="{% url 'shop:product_list' %}"> {% trans 'Back to Home' %} </a>
+</div>
 
 
 </body>
 </html>
+
+
+
+
+
+
+

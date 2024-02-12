@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-08 10:56+0330\n"
-"PO-Revision-Date: 2023-08-21 19:58+0000\n"
-"Last-Translator: Ali Ghorbani <aghorbani778@gmail.com>\n"
+"POT-Creation-Date: 2023-12-17 16:29+0330\n"
+"PO-Revision-Date: 2024-02-10 19:47+0330\n"
+"Last-Translator:   <aghorbani778@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -19,66 +19,78 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\models.py
+#: .\models.py:14 .\models.py:15
 msgid "Orders"
 msgstr "سفارشات"
 
-#: .\models.py
-msgid "Order"
-msgstr "سفارش"
-
-#: .\models.py
-msgid "OrderItems"
-msgstr "ایتم های سفارش"
-
-#: .\models.py
-msgid "OrderItem"
-msgstr "ایتم سفارش"
-
-#: .\models.py:10
+#: .\models.py:18
 msgid "user"
 msgstr "کاربر"
 
-#: .\models.py:12
+#: .\models.py:20
 msgid "is paid"
-msgstr "پرداخت شده "
+msgstr "پرداخت شده ؟"
 
-#: .\models.py:14
+#: .\models.py:22
 msgid "first_name"
-msgstr "نام"
+msgstr "نام "
 
-#: .\models.py:15
+#: .\models.py:23
 msgid "last_name"
 msgstr "نام خانوادگی"
 
-#: .\models.py:16
-msgid "phone_number"
-msgstr "شماره تلفن"
-
-#: .\models.py:17
-msgid "address"
-msgstr "ادرس"
-
 #: .\models.py:25
+msgid "phone_number"
+msgstr "شماره تماس"
+
+#: .\models.py:26
+msgid "address"
+msgstr "آدرس"
+
+#: .\models.py:34
 msgid "data_created"
 msgstr "تاریخ ایجاد"
 
-#: .\models.py:26
+#: .\models.py:35
 msgid "data_modified"
-msgstr "تاریخ ویرایش"
+msgstr "تاریخ تغییر"
 
-#: .\models.py:43
+#: .\models.py:54 .\models.py:55
+msgid "OrderItems"
+msgstr "محصولات سفارش"
+
+#: .\models.py:57
 msgid "which order"
-msgstr "آیدی سفارش"
+msgstr "سفارش"
 
-#: .\models.py:45
+#: .\models.py:59
 msgid "which product"
-msgstr "آیدی محصول"
+msgstr "محصول"
 
-#: .\models.py:46
+#: .\models.py:60
 msgid "quantity"
 msgstr "تعداد"
 
-#: .\models.py:47
+#: .\models.py:61
+msgid "color"
+msgstr "رنگ"
+
+#: .\models.py:62
+msgid "size"
+msgstr "اندازه"
+
+#: .\models.py:63
 msgid "price"
 msgstr "قیمت"
+
+#: .\views.py:20
+msgid "u must add some product first"
+msgstr "لطفا ابتدا تعدادی محصول به سبد خرید خود اضافه کنید"
+
+#: .\views.py:48
+msgid "your order has successfully add"
+msgstr "لطفا ابتدا تعدادی محصول به سبد خرید خود اضافه کنید"
+
+#: .\views.py:56
+msgid "some error in information"
+msgstr ""

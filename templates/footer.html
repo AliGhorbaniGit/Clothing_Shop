@@ -10,22 +10,23 @@
                     <div class="footer-widget mb--50">
                         <div class="textwidget">
                             <img src="{% static 'img/iconA.png' %}" alt="Logo">
+                            <a href="{% url 'aboutme' %}"> {% translate 'Created by ALi / About me' %}  </a>
                         </div>
                     </div>
                     <div class="footer-widget mb--50 pb--1">
                         <ul class="footer-menu">
-                            <li><a href="{% url 'aboutme' %}"> {% trans 'About Me' %}</a></li>
+
                             <br>
                             <br>
                             <li>
-                                <a href="{% url 'rules' %}"> {% trans 'Rules And Policies' %}  <br>
+                                <a href="{% url 'rules' %}">
                                     <img height="12%" width="13%" src="{% static 'img/Rules.png' %} ">
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div class="footer-widget">
-                        all rights reserved
+                        {% translate 'All Rights Reserved' %}
                     </div>
                 </div>
             </div>

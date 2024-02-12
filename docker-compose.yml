@@ -11,9 +11,11 @@ services:
     depends_on:
       - db
     environment:
-      - "django_secret_key=docker_compose_django_secret_key"
-      - "debug=docker_compose_debug"
+      - "DJANGO_SECRET_KEY=${DOCKER_COMPOSE_DJANGO_SECRET_KEY}"
+      - "DJANGO_DEBUG=${DOCKER_COMPOSE_DJANGO_DEBUG}"
       - "DJANGO_ZARINPAL_MERCHANT_ID=${DOCKER_COMPOSE_DJANGO_ZARINPAL_MERCHANT_ID}"
+      - "SETTINGS_EMAIL_HOST_USER=${DOCKER_COMPOSE_SETTINGS_EMAIL_HOST_USER}"
+      - "SETTINGS_EMAIL_HOST_PASSWORD=${DOCKER_COMPOSE_SETTINGS_EMAIL_HOST_PASSWORD}"
   db:
     image: postgres:14
     environment:

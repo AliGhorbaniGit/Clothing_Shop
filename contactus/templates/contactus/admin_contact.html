@@ -185,11 +185,11 @@
 
 
         <div class="text_holder">
-                <p class="user_text "> {{ contact.user_text }}</p>
-                <br>
+            <p class="user_text "> {{ contact.user_text }}</p>
+            <br>
         </div>
 
-        <form class="user_form" action="{% url 'admin_to_new_user_contact' contact.id %}" method="POST">
+        <form class="user_form" action="{% url 'contactus:admin_answer_contact' contact.id %}" method="POST">
             {% csrf_token %}
             <textarea class="form_text " name="admin_text" placeholder=".............type here"></textarea>
             <button class=" form_send_button"> {% trans 'send' %}</button>

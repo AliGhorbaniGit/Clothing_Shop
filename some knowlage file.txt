@@ -1,0 +1,122 @@
+class UserInformationChangeForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ('username', 'first_name', 'last_name', 'email', 'number', 'image')
+        # widgets = {'password': forms.PasswordInput(), } i cant change password here because it not hashes
+
+
+---------------------
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['first_name', 'last_name', 'phone_number', 'address', 'order_notes', ]
+        # widgets = {
+        #     'order_notes': forms.Textarea(attrs={'rows': 5, 'placeholder': 'any note that u want to add'}),
+        # }
+
+
+        ------------------------------------
+
+         user = request.user
+    order = user.orders.all().latest('data_created')
+    color_fields = ['color_1', 'color_2', 'color_3', 'color_4']
+    order_items = order.items.all()
+    for order in order_items:
+        products = Product.objects.filter(id=order.product.id)
+        for product in products:
+            target_product = product.size_color_count.all()
+
+            for target in target_product:
+
+                if target.color_1 == order.color and target.how_many_color_1 > 0:
+                    updated = target.how_many_color_1 - order.quantity
+                    ProductColorSizeCount.objects.filter(pk=target.id).update(how_many_color_1=updated)
+
+                elif target.color_2 == order.color and target.how_many_color_2 > 0:
+                    updated = target.how_many_color_2 - order.quantity
+                    ProductColorSizeCount.objects.filter(pk=target.id).update(how_many_color_2=updated)
+
+                elif target.color_3 == order.color and target.how_many_color_3 > 0:
+                    updated = target.how_many_color_3 - order.quantity
+                    ProductColorSizeCount.objects.filter(pk=target.id).update(how_many_color_3=updated)
+
+                elif target.color_4 == order.color and target.how_many_color_4 > 0:
+                    updated = target.how_many_color_4 - order.quantity
+                    ProductColorSizeCount.objects.filter(pk=target.id).update(how_many_color_4=updated)
+
+                else:
+                    messages.warning(request, 'it seems some strange things happen')
+
+                if all(getattr(target, f'how_many_color_{i}') == 0 for i in range(1, 5)):
+                    Product.objects.filter(pk=target.product.id).update(available=False)
+                    AdminAwareness.objects.create(
+                        what_happened=f' the quantity of {target.product.title} get zero , so now its unavailable for user ',
+                        link=target.product.get_absolute_url(), )
+
+-----------------------------------------
+
+
+
+
+    # search_input = request.POST.get('text')
+    #
+    # try:
+    #     print('try 5')
+    #     if len(search_input) > 2:
+    #
+    #         all_products = Product.objects.all()
+    #         result = []
+    #         for product in all_products:
+    #
+    #             counter = 0
+    #             for item in range(0, 3):
+    #                 if product.title[item] == search_input[item]:
+    #                     counter += 1
+    #                 if counter > 2:
+    #                     result.append(product.pk)
+    #
+    #                     break
+    #
+    #     else:
+    #         messages.warning(request, _('please enter more than 2 character'))
+    #         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    #
+    # except:
+    #     result = False
+    #
+    # if result:
+    #
+    #     return search_result_view(request, search=result)
+    #
+    # else:
+    #
+    #     if len(str(search_input)) < 3:
+    #         messages.warning(request, _('please enter more than 2 character'))
+    #         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    #
+    #     else:
+    #         messages.success(request, _(f' no result for  {search_input} ) '))
+    #         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    #
+
+-------------------------------------------
+
+class AccountsTest(TestCase):
+    def setUp(self):
+        self.test_user = CustomUser.objects.create(username="Ali", password='1axas5xa', email='AAA@gmail.com')
+        # login = self.client.get(reverse('account_login'))
+        # user = get_user_model().objects.create(username="Ali")
+        # user.set_password("psst")
+        # user.save()
+        # EmailAddress.objects.create(
+        #     user=user,
+        #     email="raymond.penners@example.com",
+        #     primary=True,
+        #     verified=True,
+        # )
+        self.req = self.client.post(
+            reverse("account_login"),
+            {"login": "ALi", "password": "psst"},
+        )
+        req = self.client.get(reverse('account_login'))
