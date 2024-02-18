@@ -175,7 +175,8 @@ def comment_reply_view(request):
 
         if form.is_valid():
             form.save()
-            messages.success(request, _('YOUR reply COMMENT SUBMITTED SUCCESSFULLY'))
+            messages.success(request, _('YOUR REPLY COMMENT SUBMITTED SUCCESSFULLY,'
+                                        'After admin confirmation will be displayed.'))
         else:
             messages.error(request, _('PLEASE FILL THE FIELD CORRECTLY'))
 

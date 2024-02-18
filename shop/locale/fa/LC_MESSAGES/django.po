@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-18 13:44+0330\n"
-"PO-Revision-Date: 2024-02-18 13:46+0330\n"
+"POT-Creation-Date: 2024-02-18 17:51+0330\n"
+"PO-Revision-Date: 2024-02-18 17:52+0330\n"
 "Last-Translator:   <aghorbani778@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Translated-Using: django-rosetta 0.9.8\n"
+"X-Translated-Using: django-rosetta 0.10.0\n"
 
 #: .\models.py:14
 msgid "PRODUCT"
@@ -225,6 +225,16 @@ msgstr "جزییات"
 msgid "comments"
 msgstr "نظرات"
 
+#: .\templates\shop\product_detail.html:191
+#| msgid "size :"
+msgid "size"
+msgstr "اندازه"
+
+#: .\templates\shop\product_detail.html:198
+#| msgid "color 1"
+msgid "color"
+msgstr "رنگ "
+
 #: .\templates\shop\product_detail.html:213
 msgid "Comment For"
 msgstr "نظر برای"
@@ -242,19 +252,24 @@ msgstr "ارسال"
 msgid "Reply :"
 msgstr "پاسخ"
 
-#: .\templates\shop\product_detail.html:316
+#: .\templates\shop\product_detail.html:293
+#| msgid "ReplyComments"
+msgid "replyes"
+msgstr "پاسخ نظرات"
+
+#: .\templates\shop\product_detail.html:330
 msgid "Write your comment"
 msgstr "نظر خود را بنویسید"
 
-#: .\templates\shop\product_detail.html:334
+#: .\templates\shop\product_detail.html:348
 msgid "send"
 msgstr "ارسال"
 
-#: .\templates\shop\product_detail.html:338
+#: .\templates\shop\product_detail.html:352
 msgid "To write your comment please "
 msgstr "برای ارسال نظر لطفا ابتدا وارد حساب کاربری خود شوید"
 
-#: .\templates\shop\product_detail.html:339
+#: .\templates\shop\product_detail.html:353
 msgid "Login"
 msgstr "ورود"
 
@@ -281,17 +296,26 @@ msgstr ""
 msgid "YOUR COMMENT NOT SUBMITTED , please fill comment form correctly"
 msgstr "نظر شما ارسال نشد ، لطفا فیلد نظر را بدرستی پر کنید"
 
-#: .\views.py:145 .\views.py:183
+#: .\views.py:145 .\views.py:184
 msgid "FOR SUBMIT COMMENT , FIRST OF ALL YOU MUST BE SIGNED IN"
 msgstr "برای ارسال نظر ، نخست باید وارد حساب کاربری خود شوید"
 
 #: .\views.py:178
-msgid "YOUR reply COMMENT SUBMITTED SUCCESSFULLY"
-msgstr "پاسخ شما برای این نظر با موفقیت ارسال شد"
+#| msgid ""
+#| "YOUR COMMENT SUBMITTED SUCCESSFULLY ,After the admin confirmation will be "
+#| "displayed. "
+msgid ""
+"YOUR REPLY COMMENT SUBMITTED SUCCESSFULLY,After admin confirmation will be "
+"displayed."
+msgstr ""
+"پاسخ نظر شما با موفقیت ارسال شد و بعد از تایید ادمین ، به نمایش در خواهد آمد"
 
-#: .\views.py:180
+#: .\views.py:181
 msgid "PLEASE FILL THE FIELD CORRECTLY"
 msgstr "لطفا فیلد نظر را بدرستی تکمیل کنید"
+
+#~ msgid "YOUR reply COMMENT SUBMITTED SUCCESSFULLY"
+#~ msgstr "پاسخ شما برای این نظر با موفقیت ارسال شد"
 
 #~ msgid "show"
 #~ msgstr "نمایش"
@@ -307,9 +331,6 @@ msgstr "لطفا فیلد نظر را بدرستی تکمیل کنید"
 
 #~ msgid "kind :"
 #~ msgstr "جنس"
-
-#~ msgid "size :"
-#~ msgstr "اندازه"
 
 #~ msgid "Color :"
 #~ msgstr "زنگ"

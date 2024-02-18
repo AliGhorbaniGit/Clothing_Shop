@@ -188,14 +188,14 @@
                                                 <tbody>
 
                                                 <tr>
-                                                    <th>سایز</th>
+                                                    <th>{% translate 'size' %}</th>
                                                     <td> {% for detail in  product.size_color_count.all %}
                                                         {{ detail.size }} -
                                                     {% endfor %}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th>رنگ</th>
+                                                    <th>{% translate 'color' %}</th>
                                                     <td> {% for detail in  product.size_color_count.all %}
                                                         {{ detail.color_1 }}  {{ detail.color_2 }} {{ detail.color_3 }}
                                                         {{ detail.color_4 }}
@@ -248,52 +248,66 @@
 
                                                                         <p class="review__description text-right px-4 pt-2">
                                                                             {{ comment.text }}
-                                                                        {% if user.is_authenticated %}
-                                                                            {% if comment.author.username == user.username %}
-                                                                                <br>
-                                                                                <form method="POST"
-                                                                                      action="{% url 'shop:edit_comment' comment.id %}">
-                                                                                    {% trans 'Edit :' %}
-                                                                                    {% csrf_token %}
-                                                                                    <input type="text" name="text"
-                                                                                           placeholder="edit your comment"
-                                                                                           value="{{ comment.text }}">
-                                                                                    <button> {% trans 'submit' %}</button>
-                                                                                </form>
+                                                                            {% if user.is_authenticated %}
+                                                                                {% if comment.author.username == user.username %}
+                                                                                    <br>
+                                                                                    <form method="POST"
+                                                                                          action="{% url 'shop:edit_comment' comment.id %}">
+                                                                                        {% trans 'Edit :' %}
+                                                                                        {% csrf_token %}
+                                                                                        <input type="text" name="text"
+                                                                                               placeholder="edit your comment"
+                                                                                               value="{{ comment.text }}">
+                                                                                        <button> {% trans 'submit' %}</button>
+                                                                                    </form>
 
-                                                                            {% else %}
+                                                                                {% else %}
 
-                                                                                <br>
+                                                                                    <br>
 
-                                                                                <form method="POST"
-                                                                                      action="{% url 'shop:comment_reply' %}">
-                                                                                    {% trans 'Reply :' %}
-                                                                                    {% csrf_token %}
+                                                                                    <form method="POST"
+                                                                                          action="{% url 'shop:comment_reply' %}">
+                                                                                        {% trans 'Reply :' %}
+                                                                                        {% csrf_token %}
 
-                                                                                    <input type="text" name="text"
-                                                                                           placeholder="Reply to this comment">
-                                                                                    <input type="hidden"
-                                                                                           value="{{ user.id }}"
-                                                                                           name="reply_author">
-                                                                                    <input type="hidden"
-                                                                                           value="{{ product.id }}"
-                                                                                           name="reply_product">
-                                                                                    <input type="hidden"
-                                                                                           value="{{ comment.id }}"
-                                                                                           name="reply_comment">
+                                                                                        <input type="text" name="text"
+                                                                                               placeholder="Reply to this comment">
+                                                                                        <input type="hidden"
+                                                                                               value="{{ user.id }}"
+                                                                                               name="reply_author">
+                                                                                        <input type="hidden"
+                                                                                               value="{{ product.id }}"
+                                                                                               name="reply_product">
+                                                                                        <input type="hidden"
+                                                                                               value="{{ comment.id }}"
+                                                                                               name="reply_comment">
 
-                                                                                    <button> {% trans 'submit' %}</button>
-                                                                                </form>
+                                                                                        <button> {% trans 'submit' %}</button>
+                                                                                    </form>
+                                                                                {% endif %}
+
                                                                             {% endif %}
-
-{% endif %}
                                                                         <br>
                                                                         <br>
                                                                         {% if comment.reply.all %}
-                                                                            <h5>: replyes </h5>
+                                                                            <h5>: {% translate 'replyes' %} </h5>
                                                                         {% endif %}
                                                                         {% for com in comment.reply.all %}
-                                                                            {{ com.text }}
+                                                                            {% if com.is_confirmed %}
+                                                                                {% if reply_author.image %}
+                                                                                    <img src="{{ user.image.url }}"
+                                                                                         style="border-radius:20px"
+                                                                                         alt="user logo"
+                                                                                         class="review__avatar p-3">
+                                                                                {% else %}
+                                                                                    <img src="{% static 'img/userlogo.png' %}"
+                                                                                         style="border-radius:20px"
+                                                                                         alt="image"
+                                                                                         class="review__avatar p-3">
+                                                                                {% endif %}
+                                                                                {{ com.reply_author  }} : {{  com.text }}
+
+                                                                            {% endif %}
                                                                             <br>
                                                                         {% endfor %}
 
