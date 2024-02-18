@@ -72,7 +72,7 @@
                                                                 <span class="product-badge"> {% translate 'unavailable' %}</span>
 
                                                             {% elif product.is_offer %}
-                                                                <span class="product-badge"> {% translate 'special offer' %}</span>
+                                                                <span class="product-badge"> {% translate 'special offer' %} {{ product.offer_percent }}%</span>
                                                             {% endif %}
 
 
@@ -82,7 +82,16 @@
                                                                 <a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
                                                             </h3>
                                                             <div class="product-price-wrapper mb--30">
-                                                                <span class="money">{{ product.price }} {% translate '$' %}</span>
+
+
+                                                                {% if product.is_offer %}
+                                                                    <span class="money text-success">{{ product.price_by_offer }} {% trans ' $ ' %}</span>
+                                                                    <span class="price-separator"> - </span>
+                                                                    <span class="money old-price text-danger"> {{ product.price }} {% trans ' $ ' %} </span>
+                                                                {% else %}
+                                                                    <span class="money text-success"> {{ product.price }} {% trans ' $ ' %} </span>
+                                                                {% endif %}
+
                                                             </div>
 
                                                             <a href="{{ product.get_absolute_url }} "

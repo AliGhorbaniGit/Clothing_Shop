@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-13 19:08+0330\n"
-"PO-Revision-Date: 2024-02-10 19:38+0330\n"
+"POT-Creation-Date: 2024-02-13 16:13+0330\n"
+"PO-Revision-Date: 2024-02-18 13:42+0330\n"
 "Last-Translator:   <aghorbani778@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,14 +19,106 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\models.py:8
+#: .\models.py:10
 msgid "Phone Number"
 msgstr "شماره تماس"
 
-#: .\models.py:9
+#: .\models.py:11
 msgid "Image"
 msgstr "تصویر"
 
-#: .\views.py:29
-msgid "click on any link to see more  detail"
-msgstr "برای جزییات بیشتر روی لینک ها کلیک کنید"
+#: .\templates\accounts\edit_profile.html:12
+msgid "Edit information's"
+msgstr "ویرایش اطلاعات "
+
+#: .\templates\accounts\edit_profile.html:29
+msgid "Home"
+msgstr "خانه"
+
+#: .\templates\accounts\profile.html:16
+msgid "About Me"
+msgstr "درباره ی من"
+
+#: .\templates\accounts\profile.html:33
+msgid "cart"
+msgstr "سبد خرید"
+
+#: .\templates\accounts\profile.html:43
+msgid "Favorites"
+msgstr "لیست پسندیده ها"
+
+#: .\templates\accounts\profile.html:50
+msgid "Orders"
+msgstr "سفارشات"
+
+#: .\templates\accounts\profile.html:104
+msgid " Welcome to your panel deer "
+msgstr "به پنل کاربری خود خوش آمدید "
+
+#: .\templates\accounts\profile.html:105
+msgid " You joined us at "
+msgstr "شما به ما ملحق شدید در :"
+
+#: .\templates\accounts\profile.html:106
+msgid " First name "
+msgstr "نام"
+
+#: .\templates\accounts\profile.html:107
+msgid " Last Name "
+msgstr "نام خانوادگی"
+
+#: .\templates\accounts\profile.html:109
+msgid "Email"
+msgstr "ایمیل"
+
+#: .\templates\accounts\profile.html:110
+#| msgid "Phone Number"
+msgid "Number"
+msgstr "شماره تماس"
+
+#: .\templates\accounts\profile.html:113
+msgid "Panel Admin"
+msgstr "پنل ادمین"
+
+#: .\templates\accounts\profile.html:116
+msgid "Notifications"
+msgstr "اعلانات"
+
+#: .\templates\accounts\profile.html:119
+msgid "Translation"
+msgstr "ترجمه"
+
+#: .\templates\accounts\profile.html:125
+msgid "Edit Informations"
+msgstr "ویرایش اطلاعات"
+
+#: .\templates\accounts\profile.html:129
+msgid "Change Password"
+msgstr "تغییر رمز عبور"
+
+#: .\templates\accounts\profile.html:133
+msgid "forgot Password"
+msgstr "فراموشی رمز عبور"
+
+#: .\templates\accounts\profile.html:137
+msgid "logout"
+msgstr "خروج"
+
+#: .\templates\accounts\profile.html:142
+msgid "Your Comments"
+msgstr "نظرات شما"
+
+#: .\templates\accounts\profile.html:157
+msgid "Your replies Comments"
+msgstr "پاسخ شما به نظرات"
+
+#: .\templates\accounts\profile.html:168
+msgid "you replied "
+msgstr "شما پاسخ داده اید :"
+
+#: .\templates\accounts\profile.html:177
+msgid "Back To Home"
+msgstr "بازگشت به خانه"
+
+#~ msgid "click on any link to see more  detail"
+#~ msgstr "برای جزییات بیشتر روی لینک ها کلیک کنید"

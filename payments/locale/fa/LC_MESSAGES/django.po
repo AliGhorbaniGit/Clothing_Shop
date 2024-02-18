@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-17 16:29+0330\n"
+"POT-Creation-Date: 2024-02-18 13:20+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,28 +17,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-#: .\views.py:53
-msgid "error occurred"
-msgstr ""
 
-#: .\views.py:54
+#: .\views.py:50
+msgid "error occurred"
+msgstr "خطایی رخ داده است"
+
+#: .\views.py:51
 #, python-brace-format
 msgid "this error occurred :{data.errors}"
-msgstr ""
+msgstr "این خطا رخ داده است : {data.errors} "
 
-#: .\views.py:97
+#: .\views.py:139
 msgid "your payment process was successful"
-msgstr ""
+msgstr " عملیات پرداخت شما با موفقیت انجام شد"
 
-#: .\views.py:100
+#: .\views.py:142
 msgid "this payment was successful and submitted in past "
-msgstr ""
+msgstr " این عملیات پرداخت مربوط به گذشته است و با موفقیت انجام شد "
 
-#: .\views.py:106
+#: .\views.py:148
 #, python-brace-format
 msgid "{error_code} : {error_message} : unsuccessful"
-msgstr ""
+msgstr "{error_code} : {error_message} : ناموفق"
 
-#: .\views.py:109
+#: .\views.py:151
 msgid " unsuccessful"
-msgstr ""
+msgstr "ناموفق"

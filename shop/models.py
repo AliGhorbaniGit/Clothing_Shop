@@ -47,9 +47,9 @@ class ProductColorSizeCount(models.Model):
         verbose_name_plural = _("Products Size And Color  ")
 
     size_CHOICES = (
-        ('Small', 'Small'),
-        ('Medium', 'Medium'),
-        ('Large', 'Large'),
+        ('Small', _('Small')),
+        ('Medium', _('Medium')),
+        ('Large', _('Large')),
     )
 
     product = models.ForeignKey(Product, related_name='size_color_count',

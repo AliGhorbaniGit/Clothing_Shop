@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-17 16:28+0330\n"
-"PO-Revision-Date: 2024-02-10 19:36+0330\n"
+"POT-Creation-Date: 2024-02-18 13:33+0330\n"
+"PO-Revision-Date: 2024-02-18 13:36+0330\n"
 "Last-Translator:   <aghorbani778@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,62 +19,112 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\cart.py:41
+#: .\cart.py:40
 msgid "Product successfully added to your cart"
 msgstr "محصول با موفقیت به سبد خرید شما اضافه شد"
 
-#: .\cart.py:52
-msgid "Product successfully removed from cart"
+#: .\cart.py:51
+#| msgid "Product successfully removed from cart"
+msgid "Product successfully removed from your cart"
 msgstr "محصول با موفقیت از سبد خرید شما حذف شد"
 
-#: .\favorite.py:28
+#: .\cart.py:55
+msgid "there is not such this Product to be remove from your cart"
+msgstr "در اینجا چنین محصولی وجود ندارد تا از سبد خرید شما حذف گردد"
+
+#: .\favorite.py:27
 msgid "Product successfully added to your favorite"
 msgstr "محصول با موفقیت به  لیست پسندیده های شما اضافه شد"
 
-#: .\favorite.py:33
+#: .\favorite.py:32
 msgid "Product successfully removed from your wish list"
 msgstr "محصول با موفقیت از لیست پسندیده ها شما حذف شد"
 
-#: .\templates\cart\cart_detail.html:9
+#: .\templates\cart\cart_detail.html:9 .\templates\cart\cart_sidebar.html:9
 msgid "Cart"
 msgstr "سبد خرید"
 
-#: .\templates\cart\cart_detail.html:84
-msgid "Cart is Empty! Please add some products to the cart"
-msgstr "سبد خرید شما خالی است "
+#: .\templates\cart\cart_detail.html:26
+msgid "picture"
+msgstr "تصویر"
 
-#: .\templates\cart\cart_detail.html:85
+#: .\templates\cart\cart_detail.html:27
+msgid "product name"
+msgstr "نام محصول"
+
+#: .\templates\cart\cart_detail.html:28
+msgid "size"
+msgstr "اندازه"
+
+#: .\templates\cart\cart_detail.html:29
+msgid "color"
+msgstr "رنگ"
+
+#: .\templates\cart\cart_detail.html:30
+msgid "price"
+msgstr "قیمت"
+
+#: .\templates\cart\cart_detail.html:31
+msgid "quantity"
+msgstr "تعداد"
+
+#: .\templates\cart\cart_detail.html:32
+msgid "total"
+msgstr "نهایی"
+
+#: .\templates\cart\cart_detail.html:171
+msgid "Cart is Empty!"
+msgstr "سبد خرید خالی است"
+
+#: .\templates\cart\cart_detail.html:172
 msgid "Go shopping"
 msgstr "خرید"
 
-#: .\templates\cart\cart_detail.html:95
+#: .\templates\cart\cart_detail.html:183
 msgid "Empty Cart"
 msgstr "خالی کردن سبد خرید"
 
-#: .\templates\cart\cart_detail.html:126
+#: .\templates\cart\cart_detail.html:197
+msgid "total price "
+msgstr "قیمت کل"
+
+#: .\templates\cart\cart_detail.html:215 .\templates\cart\cart_sidebar.html:50
 msgid "Checkout"
 msgstr "پرداخت"
 
-#: .\templates\cart\wishlist.html:4
-msgid "wish list"
-msgstr "لیست پسندیده های شما"
+#: .\templates\cart\cart_sidebar.html:42
+msgid "Total"
+msgstr "نهایی"
 
-#: .\templates\cart\wishlist.html:64
+#: .\templates\cart\cart_sidebar.html:43 .\templates\cart\wishlist.html:79
 msgid "$"
 msgstr "ریال"
 
-#: .\templates\cart\wishlist.html:75
+#: .\templates\cart\cart_sidebar.html:47
+#| msgid "Add to Cart"
+msgid "Go to cart"
+msgstr "رفتن به سبد خرید  "
+
+#: .\templates\cart\wishlist.html:5
+msgid "wish list"
+msgstr "لیست پسندیده های شما"
+
+#: .\templates\cart\wishlist.html:90
 msgid "Add to Cart"
 msgstr "افزودن به سبد خرید  "
 
-#: .\views.py:43
-msgid "your cart get empy"
-msgstr "سبد خرید شما خالی شد !"
-
-#: .\views.py:45
+#: .\views.py:61
 msgid "you have nothing in cart"
 msgstr "سبد خرید شما خالی است"
 
-#: .\views.py:60
-msgid "your wish list is empty "
+#: .\views.py:65
+msgid "your cart get empy"
+msgstr "سبد خرید شما خالی شد !"
+
+#: .\views.py:83
+#| msgid "your wish list is empty "
+msgid "your favorites list is empty "
 msgstr "لیست پسندیده های شما خالی میباشد"
+
+#~ msgid "Cart is Empty! Please add some products to the cart"
+#~ msgstr "سبد خرید شما خالی است "

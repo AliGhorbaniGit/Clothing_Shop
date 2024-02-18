@@ -6,6 +6,7 @@ services:
     command: python /code/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
+      - ./path_to_your_static_directory:/path_to_static_directory_inside_container
     ports:
       - "8000:8000"
     depends_on:

@@ -10,6 +10,12 @@ body {
     text-align: right !important;
 }
 
+.header{
+    background-color: red;
+    margin-top:10px;
+    border-radius: 0 0 8px 8px;
+}
+
 .header-toolbar__btn {
     list-style: none;
 }
@@ -380,6 +386,11 @@ body {
     height: 100px;
     max-height: 100px;
     margin-bottom: -15px;
+}
+a:hover{
+    color: red;
+    scale:1.1;
+    transition: 0.3s;
 }
 
 

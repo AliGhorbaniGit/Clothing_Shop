@@ -12,11 +12,17 @@
 
 </head>
 <body>
-
 <div class="content">
 
-    <div class="holder">
+    <div class="holder" s>
+{% if messages %}
+    <div class="container">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" style="text-align: center">{{ message }}</div>
+        {% endfor %}
+    </div>
 
+{% endif %}
         <div>
             <form action="" method="post">
                 {% csrf_token %}
@@ -24,7 +30,7 @@
                 <button type="submit"> Sign Up</button>
             </form>
 
-            <a href="{% url 'account_signup' %}">{% translate 'LOGIN ?' %}</a>
+            <a href="{% url 'account_login' %}">{% translate 'LOGIN ?' %}</a>
             <a href="{% url 'shop:product_list' %}">{% translate 'Home' %}</a>
         </div>
 

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-17 16:29+0330\n"
-"PO-Revision-Date: 2024-02-10 19:47+0330\n"
+"POT-Creation-Date: 2024-02-18 13:25+0330\n"
+"PO-Revision-Date: 2024-02-18 13:30+0330\n"
 "Last-Translator:   <aghorbani778@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,78 +19,140 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\models.py:14 .\models.py:15
+#: .\models.py:12 .\models.py:50 .\templates\orders\order_create.html:14
+#| msgid "Orders"
+msgid "Order"
+msgstr "سفارش"
+
+#: .\models.py:13
 msgid "Orders"
 msgstr "سفارشات"
 
-#: .\models.py:18
-msgid "user"
+#: .\models.py:16
+msgid "User"
 msgstr "کاربر"
 
-#: .\models.py:20
-msgid "is paid"
+#: .\models.py:17
+msgid "Is Paid"
 msgstr "پرداخت شده ؟"
 
-#: .\models.py:22
-msgid "first_name"
+#: .\models.py:18
+#| msgid "first_name"
+msgid "First Name"
 msgstr "نام "
 
-#: .\models.py:23
-msgid "last_name"
+#: .\models.py:19
+msgid "Last Name"
 msgstr "نام خانوادگی"
 
-#: .\models.py:25
-msgid "phone_number"
+#: .\models.py:21
+#| msgid "phone_number"
+msgid "Phone Number"
 msgstr "شماره تماس"
 
-#: .\models.py:26
-msgid "address"
+#: .\models.py:22
+#| msgid "address"
+msgid "Address"
 msgstr "آدرس"
 
-#: .\models.py:34
-msgid "data_created"
-msgstr "تاریخ ایجاد"
+#: .\models.py:23
+#| msgid "OrderItems"
+msgid "Order Notes"
+msgstr "یادداشت سفارش"
 
-#: .\models.py:35
-msgid "data_modified"
-msgstr "تاریخ تغییر"
+#: .\models.py:25
+msgid "Zarinpal Authority"
+msgstr "زرین پال / هویت"
 
-#: .\models.py:54 .\models.py:55
-msgid "OrderItems"
+#: .\models.py:26
+msgid "Zarinpal Ref Id"
+msgstr "زرین پال ref id"
+
+#: .\models.py:27
+msgid "Zarinpal Data"
+msgstr "داده های زرین پال"
+
+#: .\models.py:29
+msgid "Created at"
+msgstr "ایجاد شده در"
+
+#: .\models.py:30
+msgid "Modified at"
+msgstr "ویرایش شده در"
+
+#: .\models.py:47
+#| msgid "OrderItems"
+msgid "Order Item"
+msgstr "محصول سفارش"
+
+#: .\models.py:48
+#| msgid "OrderItems"
+msgid "Order Items"
 msgstr "محصولات سفارش"
 
-#: .\models.py:57
-msgid "which order"
-msgstr "سفارش"
-
-#: .\models.py:59
-msgid "which product"
+#: .\models.py:52
+#| msgid "which product"
+msgid "Product"
 msgstr "محصول"
 
-#: .\models.py:60
-msgid "quantity"
+#: .\models.py:53
+#| msgid "quantity"
+msgid "Quantity"
 msgstr "تعداد"
 
-#: .\models.py:61
-msgid "color"
+#: .\models.py:54
+#| msgid "color"
+msgid "Color"
 msgstr "رنگ"
 
-#: .\models.py:62
-msgid "size"
+#: .\models.py:55
+msgid "Size"
 msgstr "اندازه"
 
-#: .\models.py:63
-msgid "price"
+#: .\models.py:56
+#| msgid "price"
+msgid "Price"
 msgstr "قیمت"
 
-#: .\views.py:20
-msgid "u must add some product first"
-msgstr "لطفا ابتدا تعدادی محصول به سبد خرید خود اضافه کنید"
+#: .\templates\orders\order_create.html:81
+msgid "Submit"
+msgstr "ارسال"
 
-#: .\views.py:48
-msgid "your order has successfully add"
-msgstr "لطفا ابتدا تعدادی محصول به سبد خرید خود اضافه کنید"
+#: .\templates\orders\order_create.html:106
+#: .\templates\orders\order_create.html:115
+msgid "$"
+msgstr "ریال"
 
-#: .\views.py:56
-msgid "some error in information"
-msgstr ""
+#: .\views.py:19
+msgid "You can not proceed to checkout page because your cart is empty."
+msgstr "شما نمیتوانید به صفحه ی پرداخت بروید چرا که سبد خرید شما خالی است ."
+
+#~ msgid "user"
+#~ msgstr "کاربر"
+
+#~ msgid "is paid"
+#~ msgstr "پرداخت شده ؟"
+
+#~ msgid "last_name"
+#~ msgstr "نام خانوادگی"
+
+#~ msgid "data_created"
+#~ msgstr "تاریخ ایجاد"
+
+#~ msgid "data_modified"
+#~ msgstr "تاریخ تغییر"
+
+#~ msgid "which order"
+#~ msgstr "سفارش"
+
+#~ msgid "size"
+#~ msgstr "اندازه"
+
+#~ msgid "u must add some product first"
+#~ msgstr "لطفا ابتدا تعدادی محصول به سبد خرید خود اضافه کنید"
+
+#~ msgid "your order has successfully add"
+#~ msgstr "لطفا ابتدا تعدادی محصول به سبد خرید خود اضافه کنید"
+
+#~ msgid "some error in information"
+#~ msgstr "خطا در اطلاعات "

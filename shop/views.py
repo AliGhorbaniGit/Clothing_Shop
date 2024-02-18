@@ -103,7 +103,7 @@ def all_product_view(request):
         products = Product.objects.filter(show=True).order_by('-available')
 
         # Number of objects to be displayed per page
-        objects_per_page = 3
+        objects_per_page = 12
 
         # Create a Paginator object
         paginator = Paginator(products, objects_per_page)

@@ -22,7 +22,7 @@
                                      alt="Product image">
                             {% endif %}
                             {% if product.is_offer %}
-                                <span class="product-badge"> {% translate 'special offer' %}</span>
+                                <span class="product-badge"> {% translate 'special offer' %} {{ product.offer_percent }}% </span>
                             {% endif %}
 
 
@@ -166,12 +166,12 @@
                                     </a>
                                     <a class="m-0 product-data-tab__link nav-link" id="nav-info-tab" data-toggle="tab"
                                        href="#nav-info" role="tab" aria-selected="true">
-                                        <span>ویژگی ها</span>
+                                        <span>{% translate 'detail' %}</span>
                                     </a>
                                     <a class="m-0 product-data-tab__link nav-link" id="nav-reviews-tab"
                                        data-toggle="tab"
                                        href="#nav-reviews" role="tab" aria-selected="true">
-                                        <span>نظرات ({{ comments|length }})</span>
+                                        <span>{% translate 'comments' %} ({{ comments|length }})</span>
                                     </a>
                                 </div>
                                 <div class="tab-content product-data-tab__content" id="product-tabContent">
@@ -248,6 +248,7 @@
 
                                                                         <p class="review__description text-right px-4 pt-2">
                                                                             {{ comment.text }}
+                                                                        {% if user.is_authenticated %}
                                                                             {% if comment.author.username == user.username %}
                                                                                 <br>
                                                                                 <form method="POST"
@@ -260,38 +261,39 @@
                                                                                     <button> {% trans 'submit' %}</button>
                                                                                 </form>
 
+                                                                            {% else %}
+
+                                                                                <br>
+
+                                                                                <form method="POST"
+                                                                                      action="{% url 'shop:comment_reply' %}">
+                                                                                    {% trans 'Reply :' %}
+                                                                                    {% csrf_token %}
+
+                                                                                    <input type="text" name="text"
+                                                                                           placeholder="Reply to this comment">
+                                                                                    <input type="hidden"
+                                                                                           value="{{ user.id }}"
+                                                                                           name="reply_author">
+                                                                                    <input type="hidden"
+                                                                                           value="{{ product.id }}"
+                                                                                           name="reply_product">
+                                                                                    <input type="hidden"
+                                                                                           value="{{ comment.id }}"
+                                                                                           name="reply_comment">
+
+                                                                                    <button> {% trans 'submit' %}</button>
+                                                                                </form>
                                                                             {% endif %}
 
-                                                                        <br>
-
-                                                                        <form method="POST"
-                                                                              action="{% url 'shop:comment_reply' %}">
-                                                                            {% trans 'Reply :' %}
-                                                                            {% csrf_token %}
-
-                                                                            <input type="text" name="text"
-                                                                                   placeholder="Reply to this comment">
-                                                                            <input type="hidden"
-                                                                                   value="{{ user.id }}"
-                                                                                   name="reply_author">
-                                                                            <input type="hidden"
-                                                                                   value="{{ product.id }}"
-                                                                                   name="reply_product">
-                                                                            <input type="hidden"
-                                                                                   value="{{ comment.id }}"
-                                                                                   name="reply_comment">
-
-                                                                            <button> {% trans 'submit' %}</button>
-                                                                        </form>
-
-
+{% endif %}
                                                                         <br>
                                                                         <br>
                                                                         {% if comment.reply.all %}
                                                                             <h5>: replyes </h5>
                                                                         {% endif %}
                                                                         {% for com in comment.reply.all %}
-                                                                            {{ com.text }}dd
+                                                                            {{ com.text }}
                                                                             <br>
                                                                         {% endfor %}
 
@@ -314,26 +316,15 @@
                                                                 {% trans 'Write your comment' %}
                                                             </span>
                                                             <br>
-                                                            {#                                                            <form action="{% url 'shop:product_detail' product.id %}"#}
-                                                            {#                                                                  method="POST">#}
-                                                            {#                                                                {% csrf_token %}#}
-                                                            {#                                                                {{ comment_form }}#}
-                                                            {#                                                                <input type="text" name="text">#}
-                                                            {#                                                                <div> <textarea name="text"> </textarea>#}
-                                                            {#                                                                <input type="submit" value="{% trans 'Submit' %}"> </div>#}
-                                                            {##}
-                                                            {#                                                            </form>#}
+
                                                             <form class="user_form"
-                                                                  action="{% url 'contactus:user_to_admin_contact' %}"
+                                                                  action="{% url 'shop:product_detail' product.id %}"
                                                                   method="POST">
                                                                 {% csrf_token %}
-                                                                <textarea class="form_text " name="user_text" style="           border-radius: 6px;
-            height: 60px;
-            margin:2px ;
-            background-color: rgba(100,180,210);
-            color: white;
-            float: right;"
-                                                                          placeholder=".............type here"></textarea>
+                                                                <textarea class="form_text " name="text"
+                                                                          style=" border-radius: 6px;height: 60px;margin:2px ;background-color: rgba(100,180,210);color: white;float: right;text-align: center;"
+
+                                                                          placeholder="........type here"></textarea>
 
                                                                 <button style="           border-radius: 6px;
             height: 60px;
