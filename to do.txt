@@ -3,20 +3,8 @@ DO :
 
     use phon number package for phone number
 
-    translation
-
-    i can use this to change site language :
-    in settings : language = a_function in a view
-    in that view get the language from user and tamamm :) ??
-
-
-    for deploy to host remove null=True from account/models/number_field
-
-    I should change it in payment/views, when i not in develop mod and deploy site happened
+    I should change it in payment/views, when i not in develop mod and deploying site
     'callback_url': 'http://127.0.0.1:8000' + reverse('payment_callback') :
-
-    code cpacha , repadly questions,
-    
 
 DONE :
 

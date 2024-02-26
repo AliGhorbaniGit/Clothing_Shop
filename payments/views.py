@@ -34,9 +34,6 @@ def payment_process(request):
         'amount': rial_total_price,
         'description': f'#{order.id}: {order.user.first_name} {order.user.last_name}',
         'callback_url': 'http://127.0.0.1:8000' + reverse('payments:payment_callback')
-        # this is one way but not professional :
-        # '127.0.0.1:8000' + reverse('payment_callback'),
-
     }
     res = requests.post(url=zarinpal_request_url, data=json.dumps(request_data), headers=request_header)
     data = res.json()['data']
@@ -128,9 +125,6 @@ def payment_callback(request):
                                 else:
                                     ProductColorSizeCount.objects.filter(pk=target.id).update(how_many_color_1=0)
 
-                            # if (
-                            #         target.how_many_color_1 and target.how_many_color_2 and target.how_many_color_3 and target.how_many_color_4) == 0:
-                            #     Product.objects.filter(pk=product.id).update(available=False)
 
                             if all(getattr(target, f'how_many_color_{i}') == 0 for i in range(1, 5)):
                                 Product.objects.filter(pk=target.product.id).update(available=False)
@@ -149,35 +143,3 @@ def payment_callback(request):
 
     else:
         return HttpResponse(_(' unsuccessful'))
-
-#
-# def product_quantity_update(request):
-#     user = request.user
-#     orders = user.orders.all()
-#     color_fields = ['color_1', 'color_2', 'color_3', 'color_4']
-#
-#     for order in orders:
-#         for orderr in order.items.last():
-#             products = Product.objects.filter(id=orderr.product.id)
-#             for product in products:
-#                 target_product = product.size_color_count.all()
-#                 for target in target_product:
-#
-#                     if target.color_1 == orderr.color and target.how_many_color_1 > 0:
-#                         updated = target.how_many_color_1 - orderr.quantity
-#                         ProductColorSizeCount.objects.filter(pk=target.id).update(how_many_color_1=updated)
-#
-#                     elif target.color_2 == orderr.color and target.how_many_color_2 > 0:
-#                         updated = target.how_many_color_2 - orderr.quantity
-#                         ProductColorSizeCount.objects.filter(pk=target.id).update(how_many_color_2=updated)
-#
-#                     elif target.color_3 == orderr.color and target.how_many_color_3 > 0:
-#                         updated = target.how_many_color_3 - orderr.quantity
-#                         ProductColorSizeCount.objects.filter(pk=target.id).update(how_many_color_3=updated)
-#
-#                     elif target.color_4 == orderr.color and target.how_many_color_4 > 0:
-#                         updated = target.how_many_color_4 - orderr.quantity
-#                         ProductColorSizeCount.objects.filter(pk=target.id).update(how_many_color_4=updated)
-#
-#                     else:
-#                         messages.warning(request, 'it seems some strange things happen')

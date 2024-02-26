@@ -15,9 +15,6 @@ from pathlib import Path
 from environs import Env
 from django.urls import reverse_lazy
 
-
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,7 +27,6 @@ env = Env()
 env.read_env()
 
 SECRET_KEY = env("DJANGO_SECRET_KEY")
-
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DJANGO_DEBUG")
@@ -85,6 +81,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    # 'rosetta.middleware.RosettaLocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -153,8 +150,8 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'fa'
 
 LANGUAGES = (
-    ('en', 'english'),
-    ('fa', 'persian')
+    ('fa', 'Persian'),
+    ('en', 'English'),
 )
 
 TIME_ZONE = 'Asia/Tehran'
@@ -162,8 +159,6 @@ TIME_ZONE = 'Asia/Tehran'
 USE_I18N = True
 USE_TZ = True
 USE_L10N = True
-
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -214,3 +209,7 @@ ACCOUNT_PASSWORD_HASH = 'bcrypt'
 # ZARINPAL variables :
 ZARINPAL_MERCHANT_ID = env("DJANGO_ZARINPAL_MERCHANT_ID")
 
+# ROZETTA SETTINGS :
+ROSETTA_WSGI_AUTO_RELOAD = True
+ROSETTA_UWSGI_AUTO_RELOAD = True
+ROSETTA_SHOW_AT_ADMIN_PANEL = True

@@ -60,35 +60,7 @@ class Cart:
 
     def __iter__(self):
         """   Marking cart iterable   """
-
-        # cart = deepcopy(self.cart)
-        # product_ids = self.cart.keys()
-        #
-        # for id in product_ids:
-        #     # is 'get' ok here ??
-        #     product = Product.objects.get(id=id)
-        #     if product:
-        #         pass
-        #     else:
-        #         del cart[str(id)]
-        #         self.save()
-        #
-        # products = Product.objects.filter(id__in=product_ids)
-        #
-        # for product in products:
-        #     cart[str(product.id)]['product_obj'] = product
-        #
-        # for item in cart.values():
-        #     if item['product_obj'].is_offer:
-        #         off = (item['product_obj'].price - (
-        #                 (item['product_obj'].price * item['product_obj'].offer_percent) / 100))
-        #         qua = item['quantity']
-        #         item['total_price'] = int(off) * qua
-        #     else:
-        #         item['total_price'] = item['product_obj'].price * item['quantity']
-        #
-        #     yield item
-
+#
         cart = deepcopy(self.cart)
         product_ids = list(self.cart.keys())
 

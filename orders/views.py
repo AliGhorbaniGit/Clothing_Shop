@@ -30,7 +30,7 @@ def order_create_view(request):
             for item in cart:
                 product = item['product_obj']
                 if product.available:
-                    # CHECK THAT IS THERE PRODUCT QUANTITY MORE THAT USER ORDER OR NOT
+                    """ CHECKING THAT IS THERE PRODUCT QUANTITY MORE THAT USER ORDER OR NOT """
                     how_many = 1
                     targets = product.size_color_count.all()
                     for target in targets:

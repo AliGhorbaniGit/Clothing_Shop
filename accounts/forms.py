@@ -23,6 +23,7 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 class UserInformationChangeForm(forms.ModelForm):
+    """ this is a form to get changed information from user """
     class Meta:
         model = get_user_model()
         fields = ('username', 'first_name', 'last_name', 'email', 'number', 'image')
