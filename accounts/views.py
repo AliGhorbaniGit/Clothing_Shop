@@ -14,21 +14,22 @@ from shop.models import Product
 @login_required
 def profile_view(request):
     """ THIS VIEW SHOW THE USER PROFILE   """
-
+    user = request.user
     """ getting user favorites information"""
     product_ids = Favorite(request)
     favorites = Product.objects.filter(id__in=product_ids)
 
     """ getting user'S comments """
-    comments = request.user.comments.all()
-    reply_comments = request.user.reply.all()
+    comments = user.comments.all()
+    reply_comments = user.reply.all()
 
     """ getting user order and order items information"""
-    orders = request.user.orders.all()
+    orders = user.orders.all()
+    # order_items = Order.objects.
 
     return render(request, 'accounts/profile.html',
                   {'favorites': favorites,
-                   'comment': comments,
+                   'comments': comments,
                    'orders': orders,
                    'reply_comments': reply_comments,
                    })

@@ -31,6 +31,7 @@
     <div class="right_holder">
         <div>
             <h2><a href="{% url 'cart:cart_detail' %}">{% trans 'cart' %}</a></h2>
+            <br>
             {% if not cart.is_empty %}
                 {% for item in cart %}
                     <p><a href="{% url 'shop:product_detail' item.product_obj.id %}"> {{ item.product_obj.title }}</a>
@@ -41,49 +42,40 @@
 
         <div>
             <h2>{% trans 'Favorites' %}  </h2>
-            {% for fav in favorites %}
-                <p><a href="{% url 'shop:product_detail' fav.id %}"> {{ fav.title }}</a></p>
+            <br>
+            {% for favorite in favorites %}
+                <p><a href="{% url 'shop:product_detail' favorite.id %}"> {{ favorite.title }}</a></p>
             {% endfor %}
         </div>
 
         <div>
-            <h2> {% trans 'Orders' %}
-                {% if orders.lenght > 0 %}
+            <h2> {% trans 'Orders' %}</h2>
+            <br>
+            {% if orders %}
+                {% for order in orders %}
+                    {{ order.date_time_created }} :
+                    {% if  order.is_paid %}
+                        paid
+                    {% else %}
+                        not paid
+                    {% endif %}
 
+                    <p style="color: white">
+                        {% for item in order.items.all %}
+                            {{ item.product }}<br>
+                            quantity : {{ item.quantity }}<br>
+                            color : {{ item.color }}<br>
+                            size : {{ item.size }}<br>
+                            price : {{ item.price }}
+                            <br>-----------------------------<br>
 
-                    {% for ord in orders %}
-
-                        {% for ordd in ord %}
-                            {{ ordd.order.first_name }}
                         {% endfor %}
 
-                        {% for comment in ore.items %}
-                            {{ comment.product }}
-                        {% endfor %}</h2>
-
-                        <p class="order">
-                            <a href="{% url 'order_products' ord.id %}">
-                                {{ ord.data_created }} |
-                                {% if  ord.is_paid %}
-                                    paid
-                                {% else %}
-                                    not paid
-                                {% endif %} |
-
-                                {{ ord.order_notes }}
-                            </a>
-                        </p>
-                    {% endfor %}
-                {% endif %}
-            {% for foo in ordser_and_items %}
-                {% for f in foo %}
-                    {{ f.product }}
+                    </p>
+                    <br><br>
                 {% endfor %}
-            {% endfor %}
+            {% endif %}
 
-            {% for item in ordser_and_items %}
-                {{ item.order.product }} add
-            {% endfor %}
 
         </div>
 
@@ -140,32 +132,35 @@
 
         <div>
             <h2> {% trans 'Your Comments' %}</h2>
-            {% for comm in comment %}
-                {% if comm.product.image %}
-                    <img src="{{ comm.product.image.url }}">
+            {% for comment in comments %}
+                {% if comment.product.image %}
+                    <img src="{{ comment.product.image.url }}">
                 {% else %}
                     <img src="{% static 'img/default-cloth-image.jpg' %}"
                          alt="Product image">
                 {% endif %}
-                <p><a href="{% url 'shop:product_detail' comm.product.id %}">{{ comm.text }}</a></p>
+                <p><a href="{% url 'shop:product_detail' comment.product.id %}">{{ comment.text }}</a></p>
             {% endfor %}
-
 
         </div>
 
         <div>
             <h2> {% trans 'Your replies Comments' %}</h2>
-            {% for comm in reply_comments %}
+            {% for reply_comment in reply_comments %}
 
-                {% if comm.reply_product.image %}
-                    <img src="{{ comm.reply_product.image.url }}">
+                {% if reply_comment.reply_product.image %}
+                    <img src="{{ reply_comment.reply_product.image.url }}">
                 {% else %}
                     <img src="{% static 'img/default-cloth-image.jpg' %}"
                          alt="Product image">
                 {% endif %}
-                <p> comment :{{ comm.reply_comment.text }} </p>
+                <p> comment :{{ reply_comment.reply_comment.text }} </p>
 
-                <p><a href="{% url 'shop:product_detail' comm.reply_product.id %}"> {% trans 'you replied ' %}: {{ comm.text }}</a></p>
+                <p>
+                    <a href="{% url 'shop:product_detail' reply_comment.reply_product.id %}">
+                        {% trans 'you replied ' %}: {{ reply_comment.text }}
+                    </a>
+                </p>
             {% endfor %}
 
 
