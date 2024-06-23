@@ -1,9 +1,7 @@
-if you want to use the reset pass or recieve email so set yoy email address and password in env file
+To utilize the reset password feature or receive emails, please ensure to set your email address and password in the env file.
 
-about this project : 
-what used : python - Django 
+This project utilizes Python with Django framework.
 
-what option cotains : user profile and all user actitvity informations , cart and payments , comments and edit or reply comments , user favourites list , search and find product 
+Features included in this project are user profiles, user activity information, cart and payment processing, commenting, editing or replying to comments, user favorites list, as well as product search and discovery.
 
-Automated warehousing : 
-  The project monitors products and their quantities, and when a product is purchased, it reduces the inventory of that         product. If a product is completely sold out and the inventory is depleted, it is removed from availability and a message     is   sent to the admin to recharge the product.
+
