@@ -35,6 +35,7 @@ def profile_view(request):
 
 
 class EditUserInformation(generic.UpdateView):
+    """ THIS IS VIEW FOR EDIT USER INFORMATIONS   """
     model = CustomUser
     form_class = UserInformationChangeForm
     template_name = 'accounts/edit_profile.html'
