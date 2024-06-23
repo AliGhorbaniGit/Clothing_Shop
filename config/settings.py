@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # django apps 
+    'debug_toolbar',
+
     # third party apps
     'ckeditor',
     'allauth',
@@ -73,6 +76,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -213,3 +217,9 @@ ZARINPAL_MERCHANT_ID = env("DJANGO_ZARINPAL_MERCHANT_ID")
 ROSETTA_WSGI_AUTO_RELOAD = True
 ROSETTA_UWSGI_AUTO_RELOAD = True
 ROSETTA_SHOW_AT_ADMIN_PANEL = True
+
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]

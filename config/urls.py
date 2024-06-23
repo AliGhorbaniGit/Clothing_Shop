@@ -33,6 +33,7 @@ urlpatterns = [
     path('rosetta/', include('rosetta.urls')),
     path('aboutme/', TemplateView.as_view(template_name="aboutme.html"), name='aboutme'),
     path('rules/', TemplateView.as_view(template_name="rules.html"), name='rules'),
+    path("__debug__/", include("debug_toolbar.urls")),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

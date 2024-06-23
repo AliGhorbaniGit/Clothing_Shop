@@ -25,7 +25,6 @@ def profile_view(request):
 
     """ getting user order and order items information"""
     orders = user.orders.all()
-    # order_items = Order.objects.
 
     return render(request, 'accounts/profile.html',
                   {'favorites': favorites,
