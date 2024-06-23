@@ -24,7 +24,7 @@ def profile_view(request):
     reply_comments = user.reply.all()
 
     """ getting user order and order items information"""
-    orders = user.orders.all()
+    orders = user.orders.prefetch_related('items').all()
 
     return render(request, 'accounts/profile.html',
                   {'favorites': favorites,

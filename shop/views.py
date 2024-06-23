@@ -12,6 +12,7 @@ from django.contrib.postgres.search import SearchVector
 from django.views.decorators.http import require_POST
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.db.models import Prefetch
 
 from accounts.forms import UserInformationChangeForm
 from accounts.models import CustomUser
@@ -30,7 +31,7 @@ def all_product_view(request):
 
     check = False
     admin_awareness = AdminAwareness.objects.all()
-    products = Product.objects.all()
+    products = Product.objects.prefetch_related('size_color_count').all()
     if len(products) == 0:
         return render(request, 'shop/product_list.html')
 
@@ -61,7 +62,7 @@ def all_product_view(request):
 
             else:
                 for item in targets:
-                    print(item.how_many_color_1)
+                   
                     if item.how_many_color_1 and item.how_many_color_2 and item.how_many_color_3 and item.how_many_color_4 == 0:
                         Product.objects.filter(pk=item.product.id).update(available=False)
                         for id in admin_awareness:
@@ -121,10 +122,12 @@ def all_product_view(request):
 def product_detail_view(request, pk):
     """     THIS VIEW IS TO SHOW A PRODUCT IN DETAIL, AND ALSO GET USER COMMENTS    """
     # get product
-    product = get_object_or_404(Product, pk=pk)
+    product = get_object_or_404(Product.objects.prefetch_related(
+        'size_color_count'
+    ), pk=pk)
 
     # get only confirmed comment
-    comments = product.comments.filter(is_confirmed=True)
+    comments = product.comments.select_related('author').prefetch_related('reply').filter(is_confirmed=True)
 
     comment_form = CommentForm
     cart_form = AddToCartForm
