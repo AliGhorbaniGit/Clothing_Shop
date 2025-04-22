@@ -1,5 +1,5 @@
 
-FROM python:3.9
+FROM python:3.13
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -12,11 +12,6 @@ RUN pip install -r requirements.txt
 COPY . /code/
 
 
-
-RUN python manage.py collectstatic --noinput
-
-# Expose the port
 EXPOSE 8000
 
-# Define the command to run the application
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

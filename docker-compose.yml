@@ -1,4 +1,4 @@
-version: '3.9'
+
 
 services:
   web:
@@ -6,18 +6,12 @@ services:
     command: python /code/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
-      - ./path_to_your_static_directory:/path_to_static_directory_inside_container
     ports:
       - "8000:8000"
     depends_on:
       - db
-    environment:
-      - "DJANGO_SECRET_KEY=${DOCKER_COMPOSE_DJANGO_SECRET_KEY}"
-      - "DJANGO_DEBUG=${DOCKER_COMPOSE_DJANGO_DEBUG}"
-      - "DJANGO_ZARINPAL_MERCHANT_ID=${DOCKER_COMPOSE_DJANGO_ZARINPAL_MERCHANT_ID}"
-      - "SETTINGS_EMAIL_HOST_USER=${DOCKER_COMPOSE_SETTINGS_EMAIL_HOST_USER}"
-      - "SETTINGS_EMAIL_HOST_PASSWORD=${DOCKER_COMPOSE_SETTINGS_EMAIL_HOST_PASSWORD}"
+
   db:
-    image: postgres:14
+    image: postgres:17
     environment:
-      - "POSTGRES_HOST_AUTH_METHOD=trust"
+      - "POSTGRES_HOST_AUTH_METHOD=trust" # just for development

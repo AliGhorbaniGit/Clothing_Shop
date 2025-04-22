@@ -29,9 +29,10 @@ env.read_env()
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = env("DJANGO_DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', 'localhost',]
 
 # Application definition
 
@@ -122,7 +123,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'PASSWORD': 'mypassword',
         'HOST': 'db',
         'POST': 5432,
     }
@@ -191,8 +192,8 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env("SETTINGS_EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = env("SETTINGS_EMAIL_HOST_PASSWORD")
+# EMAIL_HOST_USER = env("SETTINGS_EMAIL_HOST_USER")
+# EMAIL_HOST_PASSWORD = env("SETTINGS_EMAIL_HOST_PASSWORD")
 
 ACCOUNT_SECTION_REMEMBER = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False

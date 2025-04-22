@@ -1,13 +1,13 @@
 
-DO :
 
-    use phon number package for phone number
-
-    I should change it in payment/views, when i not in develop mod and deploying site
-    'callback_url': 'http://127.0.0.1:8000' + reverse('payment_callback') :
+I should change it in payment/views, when i not in develop mod and deploying site
+'callback_url': 'http://127.0.0.1:8000' + reverse('payment_callback') :
 
 
-    is need to change data base settings for deploy ?
+dockerized
+in18
+TDD
 
-DONE :
+test , run it
+orm optiomisation
 
