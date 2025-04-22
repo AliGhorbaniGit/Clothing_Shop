@@ -33,6 +33,9 @@ class UserReplyCommentInline(admin.TabularInline):
 class UsersAdmin(admin.ModelAdmin):
     list_display = ['username', 'first_name', 'last_name', 'email', 'number', 'image']
     inlines = [UserOrdersInline, UserCommentInline, UserContactusInline, UserReplyCommentInline]
+    list_per_page = 20
+    search_fields = ["id", 'product', ]
+    list_filter = ['username', 'first_name', 'number', ]
 
 
 admin.site.register(CustomUser, UsersAdmin)

@@ -15,6 +15,7 @@ from shop.models import Product
 def profile_view(request):
     """ THIS VIEW SHOW THE USER PROFILE   """
     user = request.user
+    
     """ getting user favorites information"""
     product_ids = Favorite(request)
     favorites = Product.objects.filter(id__in=product_ids)

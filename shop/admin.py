@@ -21,6 +21,10 @@ class ProductColorSizeCountAdmin(admin.ModelAdmin):
 
 class CommentAdmin(admin.ModelAdmin):
     list_display = ['author', 'product', 'text', 'date_created', 'is_confirmed', ]
+    list_editable = ['is_confirmed', ]
+    list_per_page = 20
+    search_fields = ['is_confirmed', 'author', 'product' ]
+    list_filter = ['date_created', 'is_confirmed', ]
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -30,10 +34,17 @@ class ProductAdmin(admin.ModelAdmin):
 
 class CommentReplyAdmin(admin.ModelAdmin):
     list_display = ['reply_author', 'text']
+    list_per_page = 20
+    search_fields = ['reply_author', ]
+    list_filter = ['reply_author',  ]
 
 
 class AdminAwarenessAdmin(admin.ModelAdmin):
     list_display = ['sender', 'subject', 'access_way', 'is_checked']
+    list_editable = ['is_checked', ]
+    list_per_page = 20
+    search_fields = ['sender', ]
+    list_filter = ['sender', 'is_checked', ]
 
 
 admin.site.register(Product, ProductAdmin)

@@ -8,7 +8,7 @@ from accounts.models import CustomUser
 
 class AccountsTest(TestCase):
     def setUp(self):
-        self.test_user = CustomUser.objects.create(username="Ali", password='1axas5xa', email='AAA@gmail.com')
+        self.test_user = CustomUser.objects.create(username="Ali", password='1axas5xa', email='test@gmail.com')
         # login = self.client.get(reverse('account_login'))
         # user = get_user_model().objects.create(username="Ali")
         # user.set_password("psst")
