@@ -107,7 +107,7 @@
                             <sup class="mini-cart-count">{{ cart|length }}</sup>
                         </a>
 
-                        <li class="header-toolbar__item user-info">
+                        <li class="header-toolbar__item user-info" style="margin-left:30px;">
                             {% if user.is_authenticated %}
                                 <a href="{% url 'accounts:profile' %}"
                                    class="header-toolbar__btn">{{ user.username }}</a>
