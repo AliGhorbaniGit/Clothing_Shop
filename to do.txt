@@ -1,13 +1,2 @@
-
-
-I should change it in payment/views, when i not in develop mod and deploying site
-'callback_url': 'http://127.0.0.1:8000' + reverse('payment_callback') :
-
-
-dockerized
-in18
-TDD
-
-test , run it
-orm optiomisation
+just a reminder sheet
 
